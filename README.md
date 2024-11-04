@@ -1,27 +1,48 @@
-# AssetManagment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+AssetManagement
+![image](https://github.com/user-attachments/assets/02f1c3dc-e5be-4d12-97ff-22d8a7e6b689)
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This project was generated with Angular CLI version 17.3.8. It is a collaborative project developed in partnership with [Zahra1380](https://github.com/Zahra1380). The front-end portion of this project is meticulously crafted using Angular version 17. Currently, version 1.0 of this project is complete, with exciting new updates on the horizon. We are committed to enhancing this project in future versions.
 
-## Code scaffolding
+Project Overview
+AssetManagement is designed to streamline university property management. The system begins by capturing master data such as assets, users, buildings, zones, and more. Subsequently, it employs a ticketing feature to facilitate further operations. The system supports three user levels:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Admin: Full access and control over the system.
 
-## Build
+Support: Limited access for support and maintenance tasks.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Normal User: Restricted access for regular users.
 
-## Running unit tests
+Getting Started
+This project is containerized using Docker. Follow these steps to get started:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Install Docker: Ensure Docker is installed on your system. You can download it from [here](https://www.docker.com/get-started).
 
-## Running end-to-end tests
+Clone the Repository: Clone this repository to your local machine.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+sh
+Copy Code
+git clone https://github.com/your-username/AssetManagement.git
+Build the Project: Navigate to the project directory and build the Docker containers using Docker Compose.
 
-## Further help
+sh
+Copy Code
+cd AssetManagement
+docker-compose build
+Run the Project: Start the containers with the following command:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+sh
+Copy Code
+docker-compose up
+Access the Application: Open your browser and navigate to http://localhost:4200/ to view the application.
+
+Development Server
+Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+
+Code Screenshot
+
+
+Contributors
+[Mohammad Mehriyari](https://github.com/MohammadMehriyari) 
+[Zahra1380](https://github.com/Zahra1380)
