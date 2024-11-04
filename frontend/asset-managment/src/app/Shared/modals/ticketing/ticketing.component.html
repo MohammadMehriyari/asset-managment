@@ -1,0 +1,126 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <div class="dialog-container">
+      <div class="dialog-header">
+        <div class="dialog-content">
+          <mat-tab-group selectedIndex="4">
+            <mat-tab label="تیکت">
+              <div class="tab-content">
+                <div class="message-container" *ngIf="showMessage">
+                  <div class="success" *ngIf="successMessage">
+                    {{ successMessage }}
+                  </div>
+                  <div class="error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div>
+                  <form
+                    class="form1"
+                    [formGroup]="ticketForm"
+                    (ngSubmit)="onSubmitTicketForm()"
+                  >
+                    <div class="row main">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="TicketSubjectId"> موضوع</label>
+                            <select
+                              id="TicketSubjectId"
+                              class="select1"
+                              formControlName="TicketSubjectId"
+                            >
+                              <option
+                                *ngFor="let subject of subjectList"
+                                [value]="subject.ticketsubjectid"
+                              >
+                                {{ subject.ticketsubjectname }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="data.computerpropertynumber !== undefined"
+                        class="row"
+                      >
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="ComputerPropertyNumber">
+                              کامپیوتر</label
+                            >
+                            <select
+                              id="ComputerPropertyNumber"
+                              class="select1"
+                              formControlName="ComputerPropertyNumber"
+                            >
+                              <option [value]="data.computerpropertynumber">
+                                {{ data.computername }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="data.deliveredgoodsid !== undefined"
+                        class="row"
+                      >
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="DeliveredGoodsiId"> کالا تحویلی</label>
+                            <select
+                              id="DeliveredGoodsiId"
+                              class="select1"
+                              formControlName="DeliveredGoodsiId"
+                            >
+                              <option [value]="data.deliveredgoodsid">
+                                {{ data.deliverygoodsname }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="ticketdescription"
+                            >توضیحات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="ticketdescription"
+                            formControlName="ticketdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="buttons2">
+                          <button type="submit" class="btn btn-primary">
+                            ثبت
+                          </button>
+                          <a (click)="ticketReset()" class="btn btn-danger">
+                            لغو
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

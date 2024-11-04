@@ -1,0 +1,125 @@
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.dialog-content {
+  padding: 16px;
+}
+
+.form1 {
+  padding-top: 15px;
+}
+input {
+  display: inline;
+  margin-top: 0px;
+  width: 270px;
+  margin-left: 50px;
+  text-align: center;
+  border-color: black;
+  border-radius: 9px;
+}
+label {
+  display: inline-block;
+  padding: 25px 20px 0 10px;
+  height: 65px;
+  width: 120px;
+  text-align: center;
+}
+.form-group {
+  display: flex;
+  flex-direction: row-reverse;
+  max-width: 650px;
+  margin-bottom: 20px;
+}
+.col-md-6 {
+  width: 30%;
+}
+.row.main {
+  margin-top: 100px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  padding: 30px 0 0 0;
+  margin-bottom: 20px;
+}
+.row {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+}
+textarea {
+  width: 300px;
+  height: 200px;
+  direction: rtl;
+  padding: 10px;
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.software-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Ensure it's on top of the backdrop */
+}
+
+.software-form .form-group {
+  margin-bottom: 15px;
+}
+
+.software-form .btn {
+  width: 100%;
+}
+.software-form label {
+  text-align: end;
+}
+.passButtons {
+  justify-content: center;
+  display: flex;
+  padding-top: 20px;
+}
+.btn.btn-primary,
+.btn.btn-success,
+.btn.btn-info {
+  margin-bottom: 20px;
+}
+.btn.btn-danger {
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+.mat-mdc-paginator {
+  display: flex;
+  justify-content: center;
+}
+.select1 {
+  word-wrap: normal;
+  margin-top: 20px;
+  width: 348px;
+  border-radius: 9px;
+}
+.form-group option {
+  text-align: center;
+}

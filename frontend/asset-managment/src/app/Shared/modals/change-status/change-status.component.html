@@ -1,0 +1,53 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="message-container" *ngIf="showMessage">
+    <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+  <div class="dialog-content">
+    <form
+      class="form1"
+      [formGroup]="ticketForm"
+      (ngSubmit)="onSubmitTicketForm()"
+    >
+      <div class="container1">
+        <div class="row">
+          <div class="form-group" style="margin-bottom: 0">
+            <label for="currentStatus"> وضعیت فعلی </label>
+            <input
+              type="text"
+              id="currentStatus"
+              readonly
+              name="currentStatus"
+              [value]="data.ticketStatusName"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="ticket_status_id"> وضعیت نهایی</label>
+            <select
+              id="ticket_status_id"
+              class="select1"
+              formControlName="ticket_status_id"
+            >
+              <option
+                *ngFor="let status of statusList"
+                [value]="status.ticketstatusid"
+              >
+                {{ status.ticketstatusname }}
+              </option>
+            </select>
+            <div class="buttons2">
+              <button type="submit" class="btn btn-primary">ثبت</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

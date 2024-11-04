@@ -1,0 +1,43 @@
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+<div class="dialog-container">
+  <div class="dialog-header">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      [dir]="'rtl'"
+      class="full-width-table"
+    >
+      <ng-container matColumnDef="computerpropertynumber">
+        <th mat-header-cell *matHeaderCellDef>شماره اموال کامپیوتر</th>
+        <td class="center-text" mat-cell *matCellDef="let row">
+          {{ row.computerpropertynumber }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="computername">
+        <th mat-header-cell *matHeaderCellDef>نام کامپیوتر</th>
+        <td class="center-text" mat-cell *matCellDef="let row">
+          {{ row.computername }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="computermodel">
+        <th mat-header-cell *matHeaderCellDef>مدل کامپیوتر</th>
+        <td class="center-text" mat-cell *matCellDef="let row">
+          {{ row.computermodel }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,198 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+
+  <a routerLink="/version"> ورژن ها </a>
+</div>
+<div>
+  <button
+    class="btn btn-primary rounded-pill px-3"
+    style="float: right; margin-right: 10px"
+    (click)="toggleView('form')"
+  >
+    ایجاد ورژن سیستم عامل جدید
+  </button>
+</div>
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+<div>
+  <form
+    class="form1"
+    *ngIf="showVersionForm"
+    [formGroup]="versionForm"
+    (ngSubmit)="onSubmitVersionForm()"
+  >
+    <div class="container1">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="os-label" for="osId"> سیستم عامل</label>
+          <p-dropdown
+            [options]="osList"
+            optionLabel="operationsystemname"
+            formControlName="osId"
+            optionValue="operationsystemid"
+            [filter]="true"
+            [showClear]="true"
+            filterPlaceholder="جستجو"
+            styleClass="prime-dropdown"
+          ></p-dropdown>
+        </div>
+      </div>
+      <!-- <div class="col-md-6">
+        <div class="form-group">
+          <label class="os-label" for="osId"> سیستم عامل</label>
+          <select id="osId" class="select1" formControlName="osId">
+            <option *ngFor="let os of osList" [value]="os.operationsystemid">
+              {{ os.operationsystemname }}
+            </option>
+          </select>
+        </div>
+      </div> -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="operationsystemversionname"> ورژن سیستم عامل </label>
+          <input
+            dir="rtl"
+            type="text"
+            id="operationsystemversionname"
+            class="form-control"
+            formControlName="operationsystemversionname"
+            placeholder="باید بیشتر از 1 حرف باشد"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="buttons2">
+        <button type="submit" class="btn btn-primary">
+          {{ this.isEditing ? "ویرایش" : "ثبت" }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="closeVersionForm()"
+        >
+          بستن
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Version Table -->
+  <div class="mat-elevation-z8" *ngIf="showVersionTable">
+    <!-- <mat-form-field>
+      <mat-label>فیلتر</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="کد ورژن"
+        #input
+      />
+    </mat-form-field> -->
+    <table
+      mat-table
+      [dataSource]="versionDataSource"
+      matSort
+      [dir]="'rtl'"
+      class="full-width-table"
+    >
+      <!-- Version ID Column -->
+      <ng-container matColumnDef="operationsystemversionid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>کد ورژن</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.operationsystemversionid }}
+        </td>
+      </ng-container>
+      <!-- OS Name Column -->
+      <ng-container matColumnDef="operationsystemname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>سیستم عامل</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.operationsystemname }}
+        </td>
+      </ng-container>
+      <!-- Version Name Column -->
+      <ng-container matColumnDef="operationsystemversionname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ورژن</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.operationsystemversionname }}
+        </td>
+      </ng-container>
+      <!--  operationsystemversioncreatetime  Column -->
+      <ng-container matColumnDef="operationsystemversioncreatetime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ایجاد</th>
+        <td mat-cell *matCellDef="let row">
+          {{ convertDate(row.operationsystemversioncreatetime) }}
+        </td>
+      </ng-container>
+      <!-- operationsystemversionupdatetime Column -->
+      <ng-container matColumnDef="operationsystemversionupdatetime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ویرایش</th>
+        <td mat-cell *matCellDef="let row">
+          {{ convertDate(row.operationsystemversionupdatetime) }}
+        </td>
+      </ng-container>
+      <!-- Edit button column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>ویرایش</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            class="btn btn-primary"
+            (click)="editVersion(row.operationsystemversionid)"
+          >
+            ویرایش
+          </button>
+        </td>
+      </ng-container>
+      <!-- Delete Button Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>حذف</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            class="btn btn-danger"
+            (click)="deleteVersion(row.operationsystemversionid)"
+          >
+            حذف
+          </button>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="[
+          'operationsystemversionid',
+          'operationsystemname',
+
+          'operationsystemversionname',
+          'operationsystemversioncreatetime',
+          'operationsystemversionupdatetime',
+          'actions',
+          'delete'
+        ]"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: [
+            'operationsystemversionid',
+            'operationsystemname',
+
+            'operationsystemversionname',
+            'operationsystemversioncreatetime',
+            'operationsystemversionupdatetime',
+            'actions',
+            'delete'
+          ]
+        "
+      ></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of buildings"
+    ></mat-paginator>
+  </div>
+</div>

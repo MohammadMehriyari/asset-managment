@@ -1,0 +1,921 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <div class="dialog-container">
+      <div class="dialog-header">
+        <div class="dialog-content">
+          <mat-tab-group selectedIndex="4">
+            <mat-tab *ngIf="userRole !== 'admin'" label="تیکت">
+              <div class="tab-content">
+                <div class="message-container" *ngIf="showMessage">
+                  <div class="success" *ngIf="successMessage">
+                    {{ successMessage }}
+                  </div>
+                  <div class="error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div>
+                  <form
+                    class="form1"
+                    [formGroup]="ticketForm"
+                    (ngSubmit)="onSubmitTicketForm()"
+                  >
+                    <div class="row main">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="TicketSubjectId"> موضوع</label>
+                            <select
+                              id="TicketSubjectId"
+                              class="select1"
+                              formControlName="TicketSubjectId"
+                            >
+                              <option
+                                *ngFor="let subject of subjectList"
+                                [value]="subject.ticketsubjectid"
+                              >
+                                {{ subject.ticketsubjectname }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="
+                          data.computerpropertynumber !== undefined &&
+                          data.computerpropertynumber !== null
+                        "
+                        class="row"
+                      >
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="ComputerPropertyNumber">
+                              کامپیوتر</label
+                            >
+                            <input
+                              type="text"
+                              id="ComputerPropertyNumber"
+                              class="form-control"
+                              formControlName="ComputerPropertyNumber"
+                              [value]="data.computerpropertynumber"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="
+                          data.deliveredgoodsid !== undefined &&
+                          data.deliveredgoodsid !== null
+                        "
+                        class="row"
+                      >
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="DeliveredGoodsiId"> کالا تحویلی</label>
+                            <input
+                              type="text"
+                              id="DeliveredGoodsiId"
+                              class="form-control"
+                              formControlName="DeliveredGoodsiId"
+                              [value]="data.deliveredgoodsid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="ticketdescription"
+                            >توضیحات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="ticketdescription"
+                            formControlName="ticketdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="buttons2">
+                          <button type="submit" class="btn btn-primary">
+                            ثبت
+                          </button>
+                          <a (click)="ticketReset()" class="btn btn-danger">
+                            لغو
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab *ngIf="userRole === 'admin'" label="اسقاط">
+              <div class="tab-content">
+                <div class="message-container" *ngIf="showMessage">
+                  <div class="success" *ngIf="successMessage">
+                    {{ successMessage }}
+                  </div>
+                  <div class="error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div class="report">
+                  <button
+                    class="btn btn-primary"
+                    (click)="
+                      abortionReport(
+                        data.computerpropertynumber,
+                        data.deliveredgoodsid
+                      )
+                    "
+                  >
+                    گزارشات
+                  </button>
+                </div>
+                <div>
+                  <form
+                    class="form1"
+                    [formGroup]="abortionForm"
+                    (ngSubmit)="onSubmitAbortionForm()"
+                  >
+                    <div class="row main">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="TicketId" style="width: 160px">
+                              کد تیکت
+                            </label>
+                            <input
+                              type="text"
+                              id="TicketId"
+                              class="form-control"
+                              formControlName="TicketId"
+                              [value]="data.ticketid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="
+                          data.computerpropertynumber !== undefined &&
+                          data.computerpropertynumber !== null
+                        "
+                        class="row"
+                      >
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="ComputerPropertyNumber">
+                              کامپیوتر</label
+                            >
+                            <input
+                              type="text"
+                              id="ComputerPropertyNumber"
+                              class="form-control"
+                              style="width: 164px; margin-right: 15px"
+                              formControlName="ComputerPropertyNumber"
+                              [value]="data.computerpropertynumber"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="
+                          data.deliveredgoodsid !== undefined &&
+                          data.deliveredgoodsid !== null
+                        "
+                        class="row"
+                      >
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="DeliveredGoodsiId"> کالا تحویلی</label>
+                            <input
+                              type="text"
+                              id="DeliveredGoodsiId"
+                              class="form-control"
+                              formControlName="DeliveredGoodsiId"
+                              [value]="data.deliveredgoodsid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="ticketdescription"
+                            >توضیحات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="ticketdescription"
+                            formControlName="ticketdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="buttons2">
+                          <button type="submit" class="btn btn-primary">
+                            ثبت
+                          </button>
+                          <a (click)="abortionReset()" class="btn btn-danger">
+                            لغو
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab
+              *ngIf="userRole === 'admin' && data.deliveredgoodsid"
+              label="تعمیرات داخلی"
+            >
+              <div class="tab-content">
+                <div class="message-container" *ngIf="showMessage">
+                  <div class="success" *ngIf="successMessage">
+                    {{ successMessage }}
+                  </div>
+                  <div class="error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div class="report">
+                  <button class="btn btn-primary" (click)="repairReport()">
+                    گزارشات
+                  </button>
+                </div>
+                <div>
+                  <form
+                    class="form1"
+                    [formGroup]="repairForm"
+                    (ngSubmit)="onSubmitRepairForm()"
+                  >
+                    <div class="row main">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="TicketId" style="width: 160px">
+                              کد تیکت
+                            </label>
+                            <input
+                              type="text"
+                              id="TicketId"
+                              class="form-control"
+                              formControlName="TicketId"
+                              [value]="data.ticketid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label style="width: 150px" for="DeliveredGoodsiId">
+                              کالا تحویلی</label
+                            >
+                            <input
+                              type="text"
+                              id="DeliveredGoodsiId"
+                              class="form-control"
+                              formControlName="DeliveredGoodsiId"
+                              [value]="data.deliveredgoodsid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="internalrepairdescription"
+                            >توضیحات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="internalrepairdescription"
+                            formControlName="internalrepairdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="internalrepairchangingdescription"
+                            >تعمیرات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="internalrepairchangingdescription"
+                            formControlName="internalrepairchangingdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="buttons2">
+                          <button type="submit" class="btn btn-primary">
+                            ثبت
+                          </button>
+                          <a (click)="repairReset()" class="btn btn-danger">
+                            لغو
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab
+              *ngIf="userRole === 'admin' && data.deliveredgoodsid"
+              label="ارسال به بیرون"
+            >
+              <div class="tab-content">
+                <div class="message-container" *ngIf="showMessage">
+                  <div class="success" *ngIf="successMessage">
+                    {{ successMessage }}
+                  </div>
+                  <div class="error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div class="report">
+                  <button class="btn btn-primary" (click)="outboundReport()">
+                    گزارشات
+                  </button>
+                </div>
+                <div>
+                  <form
+                    class="form1"
+                    [formGroup]="outboundForm"
+                    (ngSubmit)="onSubmitOutboundForm()"
+                  >
+                    <div class="row main">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="TicketId" style="width: 160px">
+                              کد تیکت
+                            </label>
+                            <input
+                              type="text"
+                              id="TicketId"
+                              class="form-control"
+                              formControlName="TicketId"
+                              [value]="data.ticketid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label style="width: 150px" for="DeliveredGoodsiId">
+                              کالا تحویلی</label
+                            >
+                            <input
+                              type="text"
+                              id="DeliveredGoodsiId"
+                              class="form-control"
+                              formControlName="DeliveredGoodsiId"
+                              [value]="data.deliveredgoodsid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="outbounddocumentdescription"
+                            >توضیحات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="outbounddocumentdescription"
+                            formControlName="outbounddocumentdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="buttons2">
+                          <button type="submit" class="btn btn-primary">
+                            ثبت
+                          </button>
+                          <a (click)="outboundReset()" class="btn btn-danger">
+                            لغو
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab *ngIf="data.computerpropertynumber" label="  نصب">
+              <div class="tab-content">
+                <div class="message-container" *ngIf="showMessage">
+                  <div class="success" *ngIf="successMessage">
+                    {{ successMessage }}
+                  </div>
+                  <div class="error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div class="report">
+                  <button class="btn btn-primary" (click)="installReport()">
+                    گزارشات
+                  </button>
+                </div>
+                <div>
+                  <form
+                    class="form1"
+                    [formGroup]="installForm"
+                    (ngSubmit)="onSubmitInstallForm()"
+                  >
+                    <div class="row main">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="TicketId" style="width: 160px">
+                              کد تیکت
+                            </label>
+                            <input
+                              type="text"
+                              id="TicketId"
+                              class="form-control"
+                              formControlName="TicketId"
+                              [value]="data.ticketid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label
+                              style="width: 150px"
+                              for="computerpropertynumber"
+                            >
+                              کامپیوتر
+                            </label>
+                            <input
+                              type="text"
+                              id="computerpropertynumber"
+                              class="form-control"
+                              formControlName="computerpropertynumber"
+                              [value]="data.computerpropertynumber"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="installationdescription"
+                            >توضیحات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="installationdescription"
+                            formControlName="installationdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="buttons2">
+                          <button type="submit" class="btn btn-primary">
+                            ثبت
+                          </button>
+                          <a (click)="installReset()" class="btn btn-danger">
+                            لغو
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+            <!-- <mat-tab
+              *ngIf="userRole === 'admin' && data.deliveredgoodsid"
+              label="   بیرون "
+            >
+              <div class="tab-content">
+                <div class="message-container" *ngIf="showMessage">
+                  <div class="success" *ngIf="successMessage">
+                    {{ successMessage }}
+                  </div>
+                  <div class="error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div class="report">
+                  <button class="btn btn-primary" (click)="repairReport()">
+                    گزارشات
+                  </button>
+                </div>
+                <div>
+                  <form
+                    class="form1"
+                    [formGroup]="outboundForm"
+                    (ngSubmit)="onSubmitOutboundForm()"
+                  >
+                    <div class="row main">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="TicketId" style="width: 160px">
+                              کد تیکت
+                            </label>
+                            <input
+                              type="text"
+                              id="TicketId"
+                              class="form-control"
+                              formControlName="TicketId"
+                              [value]="data.ticketid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label style="width: 150px" for="DeliveredGoodsiId">
+                              کالا تحویلی</label
+                            >
+                            <input
+                              type="text"
+                              id="DeliveredGoodsiId"
+                              class="form-control"
+                              formControlName="DeliveredGoodsiId"
+                              [value]="data.deliveredgoodsid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="outbounddocumentdescription"
+                            >توضیحات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="outbounddocumentdescription"
+                            formControlName="outbounddocumentdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="buttons2">
+                          <button type="submit" class="btn btn-primary">
+                            ثبت
+                          </button>
+                          <a (click)="outboundReset()" class="btn btn-danger">
+                            لغو
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab> -->
+            <mat-tab label=" جابجایی ">
+              <div class="tab-content">
+                <div class="message-container" *ngIf="showMessage">
+                  <div class="success" *ngIf="successMessage">
+                    {{ successMessage }}
+                  </div>
+                  <div class="error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                  </div>
+                </div>
+                <div *ngIf="userRole === 'admin'" class="report">
+                  <button class="btn btn-primary" (click)="exchangeReport()">
+                    گزارشات
+                  </button>
+                </div>
+                <div>
+                  <form
+                    class="form1"
+                    [formGroup]="exchangeForm"
+                    (ngSubmit)="onSubmitExchangeForm()"
+                  >
+                    <div class="row main">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="TicketId" style="width: 160px">
+                              کد تیکت
+                            </label>
+                            <input
+                              type="text"
+                              id="TicketId"
+                              class="form-control"
+                              formControlName="TicketId"
+                              [value]="data.ticketid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="data.deliveredgoodsid" class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label style="width: 150px" for="DeliveredGoodsiId">
+                              کالا تحویلی</label
+                            >
+                            <input
+                              type="text"
+                              id="DeliveredGoodsiId"
+                              class="form-control"
+                              formControlName="DeliveredGoodsiId"
+                              [value]="data.deliveredgoodsid"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="data.computerpropertynumber" class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label
+                              style="width: 150px"
+                              for="ComputerPropertyNumber"
+                            >
+                              کامپیوتر
+                            </label>
+                            <input
+                              type="text"
+                              id="ComputerPropertyNumber"
+                              class="form-control"
+                              formControlName="ComputerPropertyNumber"
+                              [value]="data.computerpropertynumber"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div style="margin-right: 110px" class="form-group">
+                          <label
+                            class="label"
+                            style="width: 190px"
+                            for="RecieverUserId"
+                            >مالک جدید</label
+                          >
+                          <p-dropdown
+                            [options]="userList"
+                            optionLabel="userlastname"
+                            formControlName="RecieverUserId"
+                            optionValue="userid"
+                            filter="true"
+                            showClear="true"
+                            filterPlaceholder="جستجو"
+                            styleClass="prime-dropdown"
+                          >
+                            <ng-template let-user pTemplate="item">
+                              <span
+                                >{{ user.username }}
+                                {{ user.userlastname }}</span
+                              >
+                            </ng-template></p-dropdown
+                          >
+                        </div>
+                        <!-- <div style="margin-right: 110px" class="form-group">
+                          <label style="width: 190px" for="RecieverUserId"
+                            >مالک جدید
+                          </label>
+                          <select
+                            id="RecieverUserId"
+                            class="select1"
+                            formControlName="RecieverUserId"
+                          >
+                            >
+                            <option selected>انتخاب کنید</option>
+                            <option
+                              *ngFor="let user of userList"
+                              [value]="user.userid"
+                            >
+                              {{ user.username }} {{ user.userlastname }}
+                            </option>
+                          </select>
+                        </div> -->
+                      </div>
+                      <div class="row">
+                        <div style="margin-right: 310px" class="form-group">
+                          <label
+                            class="label"
+                            style="width: 90px"
+                            for="buildingId"
+                            >ساختمان</label
+                          >
+                          <p-dropdown
+                            [options]="buildingList"
+                            optionLabel="buildingname"
+                            formControlName="buildingId"
+                            optionValue="buildingid"
+                            filter="true"
+                            showClear="true"
+                            filterPlaceholder="جستجو"
+                            styleClass="prime-dropdown"
+                          ></p-dropdown>
+                        </div>
+                        <!-- <div style="margin-right: 310px" class="form-group">
+                          <label style="width: 90px" for="buildingId"
+                            >ساختمان
+                          </label>
+                          <select
+                            id="buildingId"
+                            class="select1"
+                            formControlName="buildingId"
+                          >
+                            >
+                            <option selected>انتخاب کنید</option>
+                            <option
+                              *ngFor="let building of buildingList"
+                              [value]="building.buildingid"
+                            >
+                              {{ building.buildingname }}
+                            </option>
+                          </select>
+                        </div> -->
+                      </div>
+                      <div class="row">
+                        <div style="margin-right: 310px" class="form-group">
+                          <label class="label" style="width: 90px" for="areaId"
+                            >حوزه</label
+                          >
+                          <p-dropdown
+                            [options]="areaList"
+                            optionLabel="areaname"
+                            formControlName="areaId"
+                            optionValue="areaid"
+                            filter="true"
+                            showClear="true"
+                            filterPlaceholder="جستجو"
+                            styleClass="prime-dropdown"
+                          ></p-dropdown>
+                        </div>
+                        <!-- <div style="margin-right: 310px" class="form-group">
+                          <label style="width: 90px" for="areaId">حوزه </label>
+                          <select
+                            id="areaId"
+                            class="select1"
+                            formControlName="areaId"
+                          >
+                            >
+                            <option selected>انتخاب کنید</option>
+                            <option
+                              *ngFor="let area of areaList"
+                              [value]="area.areaid"
+                            >
+                              {{ area.areaname }}
+                            </option>
+                          </select>
+                        </div> -->
+                      </div>
+                      <div class="row">
+                        <div
+                          style="margin-top: 30px; margin-right: 320px"
+                          class="form-group"
+                        >
+                          <label
+                            style="margin-top: 60px"
+                            for="exchangingdescription"
+                            >توضیحات
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="exchangingdescription"
+                            formControlName="exchangingdescription"
+                            rows="3"
+                          ></textarea>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="buttons2">
+                          <button type="submit" class="btn btn-primary">
+                            ثبت
+                          </button>
+                          <a (click)="exchangeReset()" class="btn btn-danger">
+                            لغو
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label=" راهنما "
+              ><div class="help-content">
+                <h2>راهنمای استفاده</h2>
+
+                <h3>نکات کلی</h3>
+                <ul>
+                  <li>
+                    لطفاً اطمینان حاصل کنید که عملیات شما با موضوع تیکت درخواستی
+                    مطابقت داشته باشد
+                  </li>
+                  <li>
+                    با زدن دکمه لغو، فرم عملیات پاک شده و می‌توانید دوباره متحان
+                    کنید
+                  </li>
+                  <li>
+                    قبل از انجام عملیات، کد کالا یا کامپیوتر موجود در تیکت را با
+                    کد فرم خود چک کنید
+                  </li>
+                </ul>
+
+                <h3>جابجایی</h3>
+                <ul>
+                  <li>لطفاً از ویژگی جابجایی کالا اطمینان حاصل کنید</li>
+                  <li>کالاهای داخل کیس قابلیت جابجایی ندارند</li>
+                  <li>
+                    می‌توانید کالای خود را با یکدیگر یا با کامپیوترهای همان
+                    ساختمان و حوزه جابجا کنید
+                  </li>
+                </ul>
+
+                <h3>اسقاط</h3>
+                <ul>
+                  <li>لطفاً از ویژگی اسقاط پذیری کالا اطمینان حاصل کنید</li>
+                  <li>کالاهای داخل کیس قابلیت اسقاط ندارند</li>
+                  <li>
+                    پس از اسقاط، کالا و کامپیوتر دیگر قابل استفاده نخواهند بود
+                  </li>
+                </ul>
+
+                <h3>تعمیر داخلی</h3>
+                <ul>
+                  <li>این عملیات مختص کالاهای خارج کیس است</li>
+                  <li>کالا باید قابلیت تعمیر داخلی را داشته باشد</li>
+                </ul>
+
+                <h3>سند ارسال به بیرون</h3>
+                <ul>
+                  <li>این عملیات مختص کالاهای خارج از کیس است</li>
+                  <li>کالا باید قابلیت ارسال به بیرون را داشته باشد</li>
+                </ul>
+
+                <h3>نصب</h3>
+                <ul>
+                  <li>
+                    این عملیات فقط برای کامپیوترهای موجود در حوزه و ساختمان شما
+                    است
+                  </li>
+                  <li>
+                    قبل از نصب نرم افزار، حتماً از موجود بودن آن در قسمت نرم
+                    افزار اطمینان حاصل کنید
+                  </li>
+                </ul>
+              </div></mat-tab
+            >
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

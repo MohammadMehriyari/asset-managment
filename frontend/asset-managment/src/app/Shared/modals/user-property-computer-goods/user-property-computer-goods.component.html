@@ -1,0 +1,88 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      [dir]="'rtl'"
+      class="full-width-table"
+    >
+      <ng-container matColumnDef="deliveredgoodsid">
+        <th mat-header-cell *matHeaderCellDef>کد کالا</th>
+        <td mat-cell *matCellDef="let row">{{ row.deliveredgoodsid }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="deliveredgoodsserial">
+        <th mat-header-cell *matHeaderCellDef>شماره سریال کالا</th>
+        <td mat-cell *matCellDef="let row">{{ row.deliveredgoodsserial }}</td>
+      </ng-container>
+      <ng-container matColumnDef="gooodsgroupname">
+        <th mat-header-cell *matHeaderCellDef>دسته کالا</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.goodsid.gooodsgroupid.gooodsgroupname }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="goodsname">
+        <th mat-header-cell *matHeaderCellDef>کالا</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.goodsid.goodsname }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="ispartinsidecomputer">
+        <th mat-header-cell *matHeaderCellDef>قطعه داخل کیس</th>
+        <td mat-cell *matCellDef="let row">
+          {{
+            getIsPartinsideComputer(
+              row.goodsid.gooodsgroupid.ispartinsidecomputer
+            )
+          }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="isallowedtosendout">
+        <th mat-header-cell *matHeaderCellDef>امکان ارسال به بیرون</th>
+        <td mat-cell *matCellDef="let row">
+          {{
+            getIsAllowedToSendOut(row.goodsid.gooodsgroupid.isallowedtosendout)
+          }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="isallowedtobeaborted">
+        <th mat-header-cell *matHeaderCellDef>اسقاط پذیری</th>
+        <td mat-cell *matCellDef="let row">
+          {{
+            getIsAllowedToBeAborted(
+              row.goodsid.gooodsgroupid.isallowedtobeaborted
+            )
+          }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="isallowedtomove">
+        <th mat-header-cell *matHeaderCellDef>جابجایی</th>
+        <td mat-cell *matCellDef="let row">
+          {{ getIsAllowedToMove(row.goodsid.gooodsgroupid.isallowedtomove) }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="ispossibletorepair">
+        <th mat-header-cell *matHeaderCellDef>امکان تعمیر</th>
+        <td mat-cell *matCellDef="let row">
+          {{
+            getIsPossibleToRepair(row.goodsid.gooodsgroupid.ispossibletorepair)
+          }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="isAbortion">
+        <th mat-header-cell *matHeaderCellDef>وضعیت اسقاط</th>
+        <td mat-cell *matCellDef="let row">
+          {{ getAbortion(row.isAbortion) }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+  <p style="color: black">تیکت ها</p>
+  <span>&nbsp;/&nbsp;</span>
+  <a routerLink="/ownTicketPage"> شخصی</a>
+</div>
+<!-- <div class="buttons">
+  <button
+    class="btn btn-primary rounded-pill px-3"
+    style="float: right; margin-right: 10px"
+    (click)="toggleView('form')"
+  >
+    ایجاد پلمپ جدید
+  </button>
+</div> -->
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+
+<!-- Ticket Table -->
+<div class="mat-elevation-z8" *ngIf="showTicketTable">
+  <!-- <mat-form-field>
+    <mat-label>فیلتر</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="فنی" #input />
+  </mat-form-field> -->
+  <table
+    mat-table
+    [dataSource]="ticketDataSource"
+    matSort
+    [dir]="'rtl'"
+    class="full-width-table"
+  >
+    <!-- ticketi ID Column -->
+    <ng-container matColumnDef="ticketid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>کد تیکت</th>
+      <td mat-cell *matCellDef="let row">{{ row.ticketid }}</td>
+    </ng-container>
+
+    <!-- ticketsubjectid Column -->
+    <ng-container matColumnDef="ticketsubjectid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>موضوع تیکت</th>
+      <td mat-cell *matCellDef="let row">
+        {{ getSubjectName(row.ticketsubjectid) }}
+      </td>
+    </ng-container>
+
+    <!-- ticketstatusid Column -->
+    <ng-container matColumnDef="ticketstatusid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>وضعیت تیکت</th>
+      <td mat-cell *matCellDef="let row">
+        {{ getStatusName(row.ticketstatusid) }}
+      </td>
+    </ng-container>
+    <!-- createruserid Column -->
+    <ng-container matColumnDef="createruserid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        کاربر ایجاد کننده
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container>
+          <p (click)="viewUserDetail(row.createruserid)">
+            {{ row.createruserid }}
+          </p>
+        </ng-container>
+      </td>
+    </ng-container>
+    <!-- ticketcreatetime   Column -->
+    <ng-container matColumnDef="ticketcreatetime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ایجاد</th>
+      <td mat-cell *matCellDef="let row">
+        {{ convertDate(row.ticketcreatetime) }}
+      </td>
+    </ng-container>
+    <!-- refferedticketdate   Column -->
+    <ng-container matColumnDef="refferedticketdate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ پاسخ</th>
+      <td mat-cell *matCellDef="let row">
+        {{ convertDate(row.referred_tickets[1].refferedticketdate) }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="viewDetail">
+      <th mat-header-cell *matHeaderCellDef>جزئیات</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="btn btn-info" (click)="viewDetail(row.ticketid)">
+          مشاهده
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="answerTicket">
+      <th mat-header-cell *matHeaderCellDef>پاسخ به تیکت</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="btn btn-info" (click)="answerTicket(row.ticketid)">
+          پاسخ
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="changeStatus">
+      <th mat-header-cell *matHeaderCellDef>تغییر وضعیت</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="btn btn-info"
+          (click)="
+            changeStatus(row.ticketid, getStatusName(row.ticketstatusid))
+          "
+        >
+          تغییر
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="viewTicket">
+      <th mat-header-cell *matHeaderCellDef class="sticky-header">عملیات</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="btn btn-info"
+          (click)="
+            viewTicket(
+              row.ticketid,
+              row.computerpropertynumber,
+              row.deliveredgoodsid
+            )
+          "
+        >
+          ثبت
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of buildings"
+  ></mat-paginator>
+</div>

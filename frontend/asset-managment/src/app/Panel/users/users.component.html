@@ -1,0 +1,590 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+
+  <a routerLink="/user"> کاربران</a>
+</div>
+<div class="buttons">
+  <button
+    class="btn btn-primary rounded-pill px-3"
+    style="float: right; margin-right: 10px"
+    (click)="toggleView('form')"
+  >
+    ایجاد کاربر جدید
+  </button>
+</div>
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+
+<div class="change-password-form" *ngIf="showChangePasswordForm">
+  <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmitChangePassword()">
+    <div class="form-group">
+      <label for="userpersonalid">کد پرسنلی</label>
+      <input
+        type="text"
+        id="userpersonalid"
+        class="form-control"
+        formControlName="userpersonalid"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <label for="new_password">رمز عبور جدید</label>
+      <input
+        type="text"
+        id="new_password"
+        class="form-control"
+        formControlName="new_password"
+        required
+      />
+    </div>
+    <div class="passButtons">
+      <button type="submit" class="btn btn-primary">تایید</button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="closeChangePasswordForm()"
+      >
+        بستن
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="currentStep === 1">
+  <!-- First step form -->
+  <form
+    class="form1"
+    *ngIf="showUsersForm"
+    [formGroup]="firstStepForm"
+    (ngSubmit)="onSubmitFirstStep()"
+  >
+    <div class="container1">
+      <!-- Form fields for first step -->
+      <div class="row" style="margin-top: 40px">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="userlastname ">نام خانوادگی</label>
+            <input
+              dir="rtl"
+              type="text"
+              id="userlastname"
+              class="form-control"
+              formControlName="userlastname"
+              placeholder="اجباری"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="username">نام </label>
+            <input
+              dir="rtl"
+              type="text"
+              id="username"
+              class="form-control"
+              formControlName="username"
+              placeholder="اجباری"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="userpersonalid">کد پرسنلی</label>
+            <input
+              type="text"
+              id="userpersonalid"
+              class="form-control"
+              formControlName="userpersonalid"
+              placeholder="اجباری"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div *ngIf="!this.isEditing" class="col-md-6">
+          <div class="form-group">
+            <label style="width: 120px" for="userroleid">سطح کاربری</label>
+            <select
+              id="userroleid"
+              class="select1"
+              formControlName="userroleid"
+              placeholder="اجباری"
+            >
+              >
+              <option selected>انتخاب کنید</option>
+              <option value="3">کاربر عادی</option>
+              <option *ngIf="!isSupporter" value="2">پشتیبان</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="userlandlinephonenumber">تلفن محل کار</label>
+            <input
+              maxlength="11"
+              type="text"
+              id="userlandlinephonenumber"
+              class="form-control"
+              formControlName="userlandlinephonenumber"
+              placeholder="اجباری"
+              pattern="^0[1-8]{2}[0-9]{8}$"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="userphonenumber">تلفن همراه</label>
+            <input
+              maxlength="11"
+              type="txt"
+              id="userphonenumber"
+              class="form-control"
+              formControlName="userphonenumber"
+              placeholder="اجباری"
+            />
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!(this.isEditing || this.isSupporter)" class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="supporterid">کد پشتیبان</label>
+            <input
+              type="text"
+              id="supporterid"
+              class="form-control"
+              formControlName="supporterid"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        *ngIf="!this.isEditing"
+        style="margin-left: 100px"
+      >
+        مرحله بعد
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        *ngIf="this.isEditing"
+        style="margin-left: 100px"
+      >
+        ویرایش
+      </button>
+      <button type="button" class="btn btn-danger" (click)="closeForm()">
+        بستن
+      </button>
+    </div>
+  </form>
+</div>
+<div *ngIf="currentStep === 2">
+  <!-- Second step form -->
+  <form
+    class="form2"
+    *ngIf="showUsersForm"
+    [formGroup]="secondStepForm"
+    (ngSubmit)="onSubmitSecondStep()"
+  >
+    <!-- Form fields for second step -->
+    <div class="container1">
+      <div class="row" style="margin-top: 40px">
+        <!-- <div class="col-md-6">
+          <div class="form-group">
+            <label for="areaId"> حوزه</label>
+            <select id="areaId" class="select1" formControlName="areaId">
+              <option *ngFor="let area of areaList" [value]="area.areaid">
+                {{ area.areaname }}
+              </option>
+            </select>
+          </div>
+        </div> -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="areaId" for="areaId"> حوزه</label>
+            <p-dropdown
+              [options]="areaList"
+              optionLabel="areaname"
+              formControlName="areaId"
+              optionValue="areaid"
+              [filter]="true"
+              [showClear]="true"
+              filterPlaceholder="جستجو"
+              styleClass="prime-dropdown"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="buildingId" for="buildingId"> ساختمان</label>
+            <p-dropdown
+              [options]="buildingList"
+              optionLabel="buildingname"
+              formControlName="buildingId"
+              optionValue="buildingid"
+              [filter]="true"
+              [showClear]="true"
+              filterPlaceholder="جستجو"
+              styleClass="prime-dropdown"
+            ></p-dropdown>
+          </div>
+        </div>
+        <!-- <div class="col-md-6">
+          <div class="form-group">
+            <label for="buildingId"> ساختمان</label>
+            <select
+              id="buildingId"
+              class="select1"
+              formControlName="buildingId"
+            >
+              <option
+                *ngFor="let building of buildingList"
+                [value]="building.buildingid"
+              >
+                {{ building.buildingname }}
+              </option>
+            </select>
+          </div>
+        </div> -->
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="userId">کد پرسنلی</label>
+            <input
+              type="text"
+              id="userId"
+              class="form-control"
+              formControlName="userpersonalid"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="userofficial">سمت</label>
+            <input
+              dir="rtl"
+              type="text"
+              id="userofficial"
+              class="form-control"
+              formControlName="userofficial"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="roomnumber">شماره اتاق</label>
+            <input
+              maxlength="11"
+              type="txt"
+              id="roomnumber"
+              class="form-control"
+              formControlName="roomnumber"
+            />
+          </div>
+        </div>
+      </div>
+      <!--  col-md-6   -->
+
+      <!--  row   -->
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="resetFormFields()"
+        style="margin-left: 10px"
+      >
+        اضافه کردن محل کار بعدی
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        *ngIf="!this.isEditing"
+        style="margin-left: 10px"
+      >
+        ثبت
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        *ngIf="this.isEditing"
+        style="margin-left: 100px"
+      >
+        ویرایش
+      </button>
+      <button type="button" class="btn btn-danger" (click)="closeForm()">
+        بستن
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Users Table -->
+<div class="mat-elevation-z8" *ngIf="showUsersTable">
+  <!-- <mat-form-field class="filter-form-field">
+    <mat-label>فیلتر</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="جستجو..."
+      #input
+    />
+  </mat-form-field> -->
+  <table
+    mat-table
+    [dataSource]="usersDataSource"
+    matSort
+    [dir]="'rtl'"
+    class="full-width-table"
+  >
+    <!-- User ID Column -->
+    <ng-container matColumnDef="userid">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        کد کاربری
+      </th>
+      <td mat-cell *matCellDef="let user">{{ user.userid }}</td>
+    </ng-container>
+
+    <!-- User PersonalId Column -->
+    <ng-container matColumnDef="userpersonalid">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        کد پرسنلی
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.userpersonalid }}</td>
+    </ng-container>
+    <!-- User  Column -->
+    <ng-container matColumnDef="user">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        کاربر
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.username }} {{ row.userlastname }}
+      </td>
+    </ng-container>
+
+    <!-- User Last Name Column -->
+    <ng-container matColumnDef="userlastname">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        نام خانوادگی
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.userlastname }}</td>
+    </ng-container>
+
+    <!-- User Phone Number Count Column -->
+    <ng-container matColumnDef="userphonenumber">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        تلفن همراه
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.userphonenumber }}</td>
+    </ng-container>
+    <!-- User Landline Phone Number Count Column -->
+    <ng-container matColumnDef="userlandlinephonenumber">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        تلفن ثابت
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.userlandlinephonenumber }}</td>
+    </ng-container>
+    <!-- User Role Column -->
+    <ng-container matColumnDef="userroleid">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        سطح کاربری
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ getUserRoleString(row.userroleid) }}
+      </td>
+    </ng-container>
+    <!-- User Supporter id Column -->
+    <ng-container matColumnDef="userspporter">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        کد پشتیبان
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.usersupportid }}</td>
+    </ng-container>
+    <!-- User Area Name  Column -->
+    <ng-container matColumnDef="areaname">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        حوزه
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.areaname }}</td>
+    </ng-container>
+    <!-- User Building Name  Column -->
+    <ng-container matColumnDef="buildingname">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        ساختمان
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.buildingname }}</td>
+    </ng-container>
+    <!-- User Official t Column -->
+    <ng-container matColumnDef="userofficial">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        سمت
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.userofficial }}</td>
+    </ng-container>
+    <!-- User Room Number t Column -->
+    <ng-container matColumnDef="roomnumber">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        اتاق
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.roomnumber }}</td>
+    </ng-container>
+    <!-- User Status  Column -->
+    <ng-container matColumnDef="is_active">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        class="sticky-header"
+      >
+        وضعیت
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ getIsActiveString(row.is_active) }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="viewDetail">
+      <th mat-header-cell *matHeaderCellDef class="sticky-header">اطلاعات</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="btn btn-info" (click)="viewDetail(row.userid)">
+          مشاهده
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="viewProperty">
+      <th mat-header-cell *matHeaderCellDef class="sticky-header">دارایی</th>
+      <td mat-cell *matCellDef="let row">
+        <button class="btn btn-info" (click)="viewProperty(row.userpersonalid)">
+          مشاهده
+        </button>
+      </td>
+    </ng-container>
+    <!-- Edit User button column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="sticky-header">
+        بخش کاربری
+      </th>
+      <td mat-cell *matCellDef="let user">
+        <button class="btn btn-primary" (click)="editUser(user)">ویرایش</button>
+      </td>
+    </ng-container>
+    <!-- Edit User button column -->
+    <ng-container matColumnDef="workActions">
+      <th mat-header-cell *matHeaderCellDef class="sticky-header">بخش کاری</th>
+      <td mat-cell *matCellDef="let user">
+        <button class="btn btn-primary" (click)="editWorkUser(user)">
+          ویرایش
+        </button>
+      </td>
+    </ng-container>
+    <!-- Toggle Column -->
+    <ng-container matColumnDef="toggle">
+      <th mat-header-cell *matHeaderCellDef class="sticky-header">
+        فعال/غیر فعال
+      </th>
+      <td mat-cell *matCellDef="let user">
+        <button
+          mat-button
+          class="btn btn-primary"
+          (click)="toggleUserStatus(user.userpersonalid, user.is_active)"
+        >
+          {{ user.is_active ? "غیر فعال" : "فعال" }}
+        </button>
+      </td>
+    </ng-container>
+    <!-- User Password Chabge Column -->
+    <ng-container matColumnDef="userpass">
+      <th mat-header-cell *matHeaderCellDef class="sticky-header">
+        تغییر رمز عبور
+      </th>
+      <td mat-cell *matCellDef="let user">
+        <button class="btn btn-primary" (click)="openChangePasswordForm(user)">
+          ویرایش
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of buildings"
+  ></mat-paginator>
+  <div
+    class="backdrop"
+    *ngIf="showChangePasswordForm"
+    (click)="closeChangePasswordForm()"
+  ></div>
+</div>

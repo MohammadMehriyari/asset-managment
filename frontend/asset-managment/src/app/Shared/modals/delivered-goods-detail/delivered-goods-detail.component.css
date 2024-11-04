@@ -1,0 +1,20 @@
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.dialog-content {
+  padding: 16px;
+}
+.full-width-table td {
+  text-align: center;
+}

@@ -1,0 +1,240 @@
+<header class="p-3 mb-3 border-bottom">
+  <div class="container">
+    <div
+      class="custom d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    >
+      <div class="dropdown show" style="cursor: pointer">
+        <a
+          class="dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="assets/Images/home.png.png"
+            alt="mdo"
+            width="32"
+            height="32"
+            class="rounded-circle"
+          />
+        </a>
+        <ul class="dropdown-menu text-small">
+          <li>
+            <a routerLink="/panel" class="dropdown-item">خانه</a>
+          </li>
+          <li *ngIf="userRole !== 'admin'">
+            <a routerLink="/userProfile" class="dropdown-item"> پروفایل</a>
+          </li>
+          <li>
+            <a routerLink="/profile" class="dropdown-item">تغییر رمز</a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" style="cursor: pointer" (click)="log_out()"
+              >خروج</a
+            >
+          </li>
+        </ul>
+      </div>
+      <a
+        class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
+      >
+        <svg
+          class="bi me-2"
+          width="40"
+          height="32"
+          role="img"
+          aria-label="Bootstrap"
+        >
+          <use xlink:href="#bootstrap" />
+        </svg>
+      </a>
+
+      <ul
+        class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+      >
+        <li>
+          <a
+            *ngIf="userRole !== 'user'"
+            routerLink="/users"
+            routerLinkActive="active-link"
+            class="nav-link px-2 link-body-emphasis"
+            >کاربران</a
+          >
+        </li>
+        <!-- Building Menu Dropdown -->
+        <li class="dropdown">
+          <a
+            *ngIf="userRole !== 'user' && userRole !== 'supporter'"
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="color: black"
+          >
+            ساختمان
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a routerLink="/buildings" class="dropdown-item">ساختمان ها</a>
+            </li>
+            <li>
+              <a routerLink="/buildingSupporters" class="dropdown-item"
+                >پشتیبانان</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a
+            *ngIf="userRole !== 'user' && userRole !== 'supporter'"
+            routerLink="/zones"
+            class="nav-link px-2 link-body-emphasis"
+            >حوزه ها</a
+          >
+        </li>
+        <!-- OP Menu Dropdown -->
+        <li class="dropdown">
+          <a
+            *ngIf="userRole !== 'user' && userRole !== 'supporter'"
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="color: black"
+          >
+            کامپیوتر
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a routerLink="/computer" class="dropdown-item"
+                >لیست کامپیوتر ها</a
+              >
+            </li>
+            <li><a routerLink="/op" class="dropdown-item">سیستم عامل</a></li>
+            <li><a routerLink="/version" class="dropdown-item">ورژن ها</a></li>
+            <li>
+              <a routerLink="/software" class="dropdown-item"> نرم افزار</a>
+            </li>
+          </ul>
+        </li>
+        <!-- feture menu dropdown -->
+        <li class="dropdown">
+          <a
+            *ngIf="userRole !== 'user' && userRole !== 'supporter'"
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="color: black"
+          >
+            مدیریت ویژگی ها</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a routerLink="/feature" class="dropdown-item">دسته ویژگی ها</a>
+            </li>
+            <li>
+              <a routerLink="/prfeature" class="dropdown-item">ویژگی ها کالا</a>
+            </li>
+          </ul>
+        </li>
+        <!-- product dropdown menu -->
+        <li class="dropdown">
+          <a
+            *ngIf="userRole !== 'user' && userRole !== 'supporter'"
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="color: black"
+          >
+            کالا</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a routerLink="/products/:category" class="dropdown-item"
+                >دسته کالا</a
+              >
+            </li>
+            <li>
+              <a routerLink="/products" class="dropdown-item"> کالا ها</a>
+            </li>
+            <li>
+              <a routerLink="/pfcOrder" class="dropdown-item">
+                ترتیب کالا ها
+              </a>
+            </li>
+            <li>
+              <a routerLink="/deliveredProducts" class="dropdown-item">
+                کالا ها تحویلی</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a
+            routerLink="/seal"
+            *ngIf="userRole !== 'user' && userRole !== 'supporter'"
+            routerLinkActive="active-link"
+            class="nav-link px-2 link-body-emphasis"
+          >
+            پلمپ</a
+          >
+        </li>
+
+        <!--  dropdown menu -->
+        <li class="dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="color: black"
+            *ngIf="userRole !== 'admin'"
+          >
+            تحت اختیار</a
+          >
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a routerLink="/usersPc" class="dropdown-item"> کامپیوتر ها</a>
+            </li>
+            <li>
+              <a routerLink="/usersDelivery" class="dropdown-item"> کالا ها</a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            style="color: black"
+          >
+            تیکت ها
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a routerLink="/ownTicketPage" class="dropdown-item"> شخصی</a>
+            </li>
+            <li>
+              <a
+                *ngIf="userRole !== 'user'"
+                routerLink="/userTicketPage"
+                class="dropdown-item"
+              >
+                کاربران زیر دسته</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,392 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+
+  <a routerLink="/deliveredProducts"> کالا های تحویلی</a>
+</div>
+<div class="buttons">
+  <button
+    class="btn btn-primary rounded-pill px-3"
+    style="float: right; margin-right: 10px"
+    (click)="toggleView('form')"
+  >
+    ایجاد کالا تحویلی جدید
+  </button>
+</div>
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+<!-- GoodsUser Form -->
+<div class="userDeliveryGoods-form" *ngIf="showUserDeliveryGoodsForm">
+  <form
+    [formGroup]="userDeliveryGoodsForm"
+    (ngSubmit)="submitUserDeliveryGoods()"
+  >
+    <div class="container1">
+      <div class="row">
+        <div class="form-group">
+          <label class="os-label" style="width: 90px" for="ownerUserId">
+            کاربر
+          </label>
+          <p-dropdown
+            [options]="userList"
+            optionLabel="userlastname"
+            formControlName="ownerUserId"
+            optionValue="userid"
+            [filter]="true"
+            [showClear]="true"
+            filterPlaceholder="جستجو"
+            styleClass="prime-dropdown"
+          >
+            <ng-template let-user pTemplate="item">
+              <span>{{ user.username }} {{ user.userlastname }}</span>
+            </ng-template></p-dropdown
+          >
+        </div>
+
+        <!-- <div class="form-group">
+          <label style="width: 90px" for="ownerUserId">کاربر </label>
+          <select
+            id="ownerUserId"
+            class="select1"
+            formControlName="ownerUserId"
+          >
+            >
+            <option selected>انتخاب کنید</option>
+            <option *ngFor="let user of userList" [value]="user.userid">
+              {{ user.username }} {{ user.userlastname }}
+            </option>
+          </select>
+        </div> -->
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label style="width: 90px" for="buildingId">ساختمان </label>
+          <select id="buildingId" class="select1" formControlName="buildingId">
+            >
+            <option selected>انتخاب کنید</option>
+            <option
+              *ngFor="let building of buildingList"
+              [value]="building.buildingid"
+            >
+              {{ building.buildingname }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label style="width: 90px" for="areaId">حوزه </label>
+          <select id="areaId" class="select1" formControlName="areaId">
+            >
+            <option selected>انتخاب کنید</option>
+            <option *ngFor="let area of areaList" [value]="area.areaid">
+              {{ area.areaname }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="passButtons">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width: 30%; margin-right: 10px"
+          >
+            تایید
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            style="width: 30%"
+            (click)="closeUserDeliveryGoodsForm()"
+          >
+            بستن
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- DP Form -->
+<div *ngIf="currentStep === 1">
+  <!-- First step form -->
+  <form
+    class="form1"
+    *ngIf="showDPForm"
+    [formGroup]="firstStepForm"
+    (ngSubmit)="onSubmitFirstStep()"
+  >
+    <div class="container2">
+      <!-- Form fields for first step -->
+      <div class="row" style="margin-top: 40px">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="deliveredgoodsserial ">شماره سریال </label>
+            <input
+              type="text"
+              id="deliveredgoodsserial"
+              class="form-control"
+              formControlName="deliveredgoodsserial"
+              placeholder="اجباری"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6" style="width: 24%">
+          <div class="form-group">
+            <label class="label" style="width: 120px" for="GoodsId">
+              کالا</label
+            >
+            <p-dropdown
+              [options]="goodsList"
+              optionLabel="goodsname"
+              formControlName="GoodsId"
+              optionValue="goodsid"
+              filter="true"
+              showClear="true"
+              filterPlaceholder="جستجو"
+              styleClass="prime-dropdown"
+            ></p-dropdown>
+          </div>
+          <!-- <div class="form-group">
+            <label style="width: 120px" for="GoodsId">کالا </label>
+            <select
+              id="GoodsId"
+              class="select1"
+              formControlName="GoodsId"
+              placeholder="اجباری"
+            >
+              >
+              <option *ngFor="let goods of goodsList" [value]="goods.goodsid">
+                {{ goods.goodsname }}
+              </option>
+            </select>
+          </div> -->
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="ispartinsidecomputer">وضعیت قطعه</label>
+            <input
+              type="text"
+              id="ispartinsidecomputer"
+              class="form-control"
+              formControlName="ispartinsidecomputer"
+              readonly
+              style="text-align: center"
+            />
+          </div>
+        </div>
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="margin-left: 10px"
+          *ngIf="!this.isEditing"
+        >
+          ثبت
+        </button>
+        <button type="submit" class="btn btn-primary" *ngIf="this.isEditing">
+          ویرایش
+        </button>
+        <button type="button" class="btn btn-danger" (click)="closeDPForm()">
+          بستن
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngIf="currentStep === 2">
+  <!-- Second step form -->
+  <form
+    class="form2"
+    *ngIf="showDPForm"
+    [formGroup]="secondStepForm"
+    (ngSubmit)="onSubmitSecondStep()"
+  >
+    <!-- Form fields for second step -->
+    <div class="container2">
+      <div class="row" style="margin-top: 40px">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="label" for="computerpropertynumber"> کامپیوتر</label>
+            <p-dropdown
+              [options]="computerList"
+              optionLabel="computername"
+              formControlName="computerpropertynumber"
+              optionValue="computerpropertynumber"
+              filter="true"
+              showClear="true"
+              filterPlaceholder="جستجو"
+              styleClass="prime-dropdown"
+            ></p-dropdown>
+          </div>
+          <!-- <div class="form-group">
+            <label for="computerpropertynumber"> کامپیوتر</label>
+            <select
+              id="computerpropertynumber"
+              class="select1"
+              formControlName="computerpropertynumber"
+            >
+              <option
+                *ngFor="let computer of computerList"
+                [value]="computer.computerpropertynumber"
+              >
+                {{ computer.computername }}
+              </option>
+            </select>
+          </div> -->
+        </div>
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          *ngIf="!this.isEditing"
+          style="margin-left: 10px"
+        >
+          ثبت
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          *ngIf="this.isEditing"
+          style="margin-left: 10px"
+        >
+          ویرایش
+        </button>
+        <button type="button" class="btn btn-danger" (click)="closeDPForm()">
+          بستن
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- DP Table -->
+<div class="mat-elevation-z8" *ngIf="showDPTable">
+  <!-- <mat-form-field>
+    <mat-label>فیلتر</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="فنی" #input />
+  </mat-form-field> -->
+  <table
+    mat-table
+    [dataSource]="DPDataSource"
+    matSort
+    [dir]="'rtl'"
+    class="full-width-table"
+  >
+    <!-- deliveredgoodid Column -->
+    <ng-container matColumnDef="deliveredgoodsid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>کد کالا</th>
+      <td mat-cell *matCellDef="let row">{{ row.deliveredgoodsid }}</td>
+    </ng-container>
+    <!-- deliveredgoodsserial Column -->
+    <ng-container matColumnDef="deliveredgoodsserial">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>شماره سریال</th>
+      <td mat-cell *matCellDef="let row">{{ row.deliveredgoodsserial }}</td>
+    </ng-container>
+
+    <!--  GoodsId Column -->
+    <ng-container matColumnDef="GoodsId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>نام</th>
+      <td mat-cell *matCellDef="let row">{{ row.goodsid.goodsname }}</td>
+    </ng-container>
+    <!--  Partioned Column -->
+    <ng-container matColumnDef="PartStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>وضعیت</th>
+      <td mat-cell *matCellDef="let row">
+        {{ getStatus(row.goodsid.gooodsgroupid.ispartinsidecomputer) }}
+      </td>
+    </ng-container>
+    <!-- deliveredgoodscreatetime   Column -->
+    <ng-container matColumnDef="deliveredgoodscreatetime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ایجاد</th>
+      <td mat-cell *matCellDef="let row">
+        {{ convertDate(row.deliveredgoodscreatetime) }}
+      </td>
+    </ng-container>
+    <!-- deliveredgoodsupdatetime  Column -->
+    <ng-container matColumnDef="deliveredgoodsupdatetime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ویرایش</th>
+      <td mat-cell *matCellDef="let row">
+        {{ convertDate(row.deliveredgoodsupdatetime) }}
+      </td>
+    </ng-container>
+    <!-- User Button Column -->
+    <ng-container matColumnDef="userDeliveryGoods">
+      <th mat-header-cell *matHeaderCellDef>تحویل کالا</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          [disabled]="row.isAbortion"
+          class="btn btn-primary"
+          *ngIf="row.goodsid.gooodsgroupid.ispartinsidecomputer === 0"
+          (click)="openUserDeliveryGoodsForm(row.deliveredgoodsid)"
+        >
+          تحویل
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="viewUser">
+      <th mat-header-cell *matHeaderCellDef>کاربر</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="btn btn-info"
+          *ngIf="row.goodsid.gooodsgroupid.ispartinsidecomputer === 0"
+          (click)="viewUser(row.deliveredgoodsid)"
+        >
+          مشاهده
+        </button>
+      </td>
+    </ng-container>
+    <!-- Edit button column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>ویرایش</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          [disabled]="row.isAbortion"
+          class="btn btn-primary"
+          *ngIf="row.goodsid.gooodsgroupid.ispartinsidecomputer === 1"
+          (click)="editDP(row.deliveredgoodsid)"
+        >
+          ویرایش
+        </button>
+      </td>
+    </ng-container>
+    <!-- Delete Button Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>حذف</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          [disabled]="row.isAbortion"
+          class="btn btn-danger"
+          (click)="deleteDP(row.deliveredgoodsid)"
+        >
+          حذف
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="viewPc">
+      <th mat-header-cell *matHeaderCellDef>کامپیوتر</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          *ngIf="row.goodsid.gooodsgroupid.ispartinsidecomputer === 1"
+          class="btn btn-info"
+          (click)="viewPc(row.deliveredgoodsserial)"
+        >
+          مشاهده
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of buildings"
+  ></mat-paginator>
+</div>

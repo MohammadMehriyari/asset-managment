@@ -1,0 +1,75 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <div class="container1">
+      <div *ngIf="filteredData?.computerpropertynumber !== null" class="row">
+        <div class="form-group">
+          <label for="computerpropertynumber">کد کامپیوتر </label>
+          <input
+            type="text"
+            id="computerpropertynumber"
+            class="form-control"
+            readonly
+            [value]="filteredData?.computerpropertynumber"
+          />
+          <button
+            class="btn btn-info"
+            style="width: 76px"
+            (click)="Detail(filteredData?.computerpropertynumber)"
+          >
+            مشاهده
+          </button>
+        </div>
+      </div>
+      <div *ngIf="filteredData?.deliveredgoodsid !== null" class="row">
+        <div class="form-group">
+          <label for="deliveredgoodsid">کد کالا تحویلی </label>
+          <input
+            type="text"
+            id="deliveredgoodsid"
+            class="form-control"
+            readonly
+            [value]="filteredData?.deliveredgoodsid"
+          />
+          <button
+            class="btn btn-info"
+            style="width: 76px"
+            (click)="detail(filteredData?.deliveredgoodsid)"
+          >
+            مشاهده
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label style="margin-top: 25px" for="ticketdescription">
+            توضیحات
+          </label>
+          <textarea
+            class="form-control"
+            id="ticketdescription"
+            rows="5"
+            readonly
+            [value]="filteredData?.ticketdescription"
+          ></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label for="secondReferredDescription"> پاسخ </label>
+          <textarea
+            class="form-control"
+            id="secondReferredDescription"
+            rows="5"
+            readonly
+            [value]="secondReferredDescriptions"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

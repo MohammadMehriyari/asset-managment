@@ -1,0 +1,27 @@
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.dialog-content {
+  padding: 16px;
+}
+.btn.btn-primary,
+.btn.btn-success,
+.btn.btn-info {
+  margin-bottom: 20px;
+}
+th,
+td {
+  padding: 5px;
+  text-align: right;
+}

@@ -1,0 +1,29 @@
+.address {
+  display: flex;
+  justify-content: right;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  flex-direction: row-reverse;
+}
+.address a,
+.address span {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+.mat-mdc-paginator {
+  display: flex;
+  justify-content: center;
+}
+
+th {
+  color: #0d00ff;
+  font-size: 15px;
+}
+.btn.btn-info {
+  margin-bottom: 20px;
+}

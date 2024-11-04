@@ -1,0 +1,85 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="message-container" *ngIf="showMessage">
+    <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+  <div class="dialog-content">
+    <form
+      class="form1"
+      [formGroup]="ticketForm"
+      (ngSubmit)="onSubmitTicketForm()"
+    >
+      <div class="container1">
+        <div class="row">
+          <div class="form-group">
+            <label for="ticketid">کد تیکت </label>
+            <input
+              type="text"
+              id="ticketid"
+              class="form-control"
+              formControlName="ticketid"
+              style="text-align: center"
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label style="margin-top: 55px" for="refferedticketdescription">
+              توضیحات
+            </label>
+            <textarea
+              class="form-control"
+              id="refferedticketdescription"
+              rows="5"
+              formControlName="refferedticketdescription"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                formControlName="actionType"
+                type="radio"
+                name="actionType"
+                id="isReply"
+                value="reply"
+              />
+              <label style="width: 80px" class="form-check-label" for="isReply"
+                >پاسخ</label
+              >
+            </div>
+            <div *ngIf="role !== 'admin'" class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                formControlName="actionType"
+                type="radio"
+                name="actionType"
+                id="isForward"
+                value="forward"
+              />
+              <label
+                style="width: 120px"
+                class="form-check-label"
+                for="isForward"
+                >ارجاع به مدیر</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="buttons2">
+            <button type="submit" class="btn btn-primary">ثبت</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

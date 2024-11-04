@@ -1,0 +1,42 @@
+services:
+    db:
+        image: mysql
+        #    command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_DATABASE: "assetManagementSystem"
+            #      MYSQL_USER: 'root'
+            MYSQL_PASSWORD: "zahra1380"
+            MYSQL_ROOT_PASSWORD: "zahra1380"
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    django:
+        #    image: onlybelter/django_py35
+        build:
+            context: backend
+            dockerfile: Dockerfile
+        restart: always
+        command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+        volumes:
+            - django_data:/backend
+        ports:
+            - "8080:8000"
+        depends_on:
+            - db
+    angular:
+        build:
+            context: ./frontend/asset-managment
+            dockerfile: Dockerfile
+        ports:
+            - "4200:4200"
+        volumes:
+            - angular_data:/frontend
+        depends_on:
+            - django
+volumes:
+    mysql_data:
+    django_data:
+    angular_data:

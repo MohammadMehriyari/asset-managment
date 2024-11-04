@@ -1,0 +1,17 @@
+h1 {
+  margin: 70px 0 0 30%;
+}
+span {
+  color: red;
+}
+.address {
+  display: flex;
+  justify-content: right;
+  padding-right: 20px;
+}
+.address a,
+.address span {
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+}

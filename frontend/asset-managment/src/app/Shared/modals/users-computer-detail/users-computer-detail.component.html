@@ -1,0 +1,98 @@
+<div class="dialog-container">
+  <div class="dialog-header">
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="dialog-content">
+    <div class="mat-elevation-z8" *ngIf="showPcTable">
+      <table
+        mat-table
+        [dataSource]="pcDataSource"
+        matSort
+        [dir]="'rtl'"
+        class="full-width-table"
+      >
+        <!-- computerpropertynumber Column -->
+        <ng-container matColumnDef="computerpropertynumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>شماره اموال</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.computerpropertynumber }}
+          </td>
+        </ng-container>
+
+        <!-- computer Name Column -->
+        <ng-container matColumnDef="computername">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>نام</th>
+          <td mat-cell *matCellDef="let row">{{ row.computername }}</td>
+        </ng-container>
+        <!-- computer Model Column -->
+        <ng-container matColumnDef="computermodel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>مدل</th>
+          <td mat-cell *matCellDef="let row">{{ row.computermodel }}</td>
+        </ng-container>
+        <!-- operationsystemname  Column -->
+        <ng-container matColumnDef="operationsystemname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>سیستم عامل</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.operationsystemversionid.operationsystemname }}
+          </td>
+        </ng-container>
+
+        <!-- computerip Column -->
+        <ng-container matColumnDef="computerip">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>IP</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.computerip }}
+          </td>
+        </ng-container>
+        <!-- computermacaddress Column -->
+        <ng-container matColumnDef="computermacaddress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>MAC</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.computermacaddress }}
+          </td>
+        </ng-container>
+        <!-- operationsystemversionname Column -->
+        <ng-container matColumnDef="operationsystemversionname">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ورژن</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.operationsystemversionid.operationsystemversionname }}
+          </td>
+        </ng-container>
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>مالکیت</th>
+          <td mat-cell *matCellDef="let row">
+            {{ getPersonalStatus(row.computerispersonal) }}
+          </td>
+        </ng-container>
+        <!-- Is Abortion Column -->
+        <ng-container matColumnDef="abortion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>وضعیت اسقاط</th>
+          <td mat-cell *matCellDef="let row">
+            {{ getAbortion(row.isAbortion) }}
+          </td>
+        </ng-container>
+                <!--  computercreatetime  Column -->
+                <ng-container matColumnDef="computercreatetime">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ایجاد</th>
+                  <td mat-cell *matCellDef="let row">
+                    {{ convertDate(row.computercreatetime) }}
+                  </td>
+                </ng-container>
+                <!-- computerupdatetime Column -->
+                <ng-container matColumnDef="computerupdatetime">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    تاریخ ویرایش
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    {{ convertDate(row.computerupdatetime) }}
+                  </td>
+                </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>

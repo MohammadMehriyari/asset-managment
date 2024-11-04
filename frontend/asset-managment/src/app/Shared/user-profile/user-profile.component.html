@@ -1,0 +1,160 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+
+  <a routerLink="/userProfile"> پروفایل کاربر</a>
+</div>
+<div class="container">
+  <div class="main-body">
+    <!-- /Breadcrumb -->
+
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img
+                src="assets/Images/avatar.png"
+                alt="Admin"
+                class="rounded-circle"
+                width="150"
+              />
+              <div class="mt-3">
+                <h4>
+                  {{ userList[0]?.username }} {{ userList[0]?.userlastname }}
+                </h4>
+                <p class="text-secondary mb-1">
+                  {{ getUserRoleString(userList[0]?.userroleid) }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">نام و نام خانوادگی</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ userList[0]?.username }} {{ userList[0]?.userlastname }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">کد پرسنلی</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ userList[0]?.userpersonalid }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">کد کاربری</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ userList[0]?.userid }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">ایمیل</h6>
+              </div>
+              <div class="col-sm-9 text-secondary"></div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">تلفن همراه</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ userList[0]?.userphonenumber }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">محل کار اول</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ "ساختمان" }}
+                {{ userList[0]?.buildingname }}
+                <span>&nbsp;</span>
+                {{ "حوزه" }}
+                {{ userList[0]?.areaname }}
+                <span>&nbsp;</span>
+                {{ "اتاق شماره " }}
+                {{ userList[0]?.roomnumber }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">سمت</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ userList[0]?.userofficial }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">تلفن محل کار</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ userList[0]?.userlandlinephonenumber }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">محل کار دوم</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ "ساختمان" }}
+                {{ userList[1]?.buildingname }}
+                <span>&nbsp;</span>
+                {{ "حوزه" }}
+                {{ userList[1]?.areaname }}
+                <span>&nbsp;</span>
+                {{ "اتاق شماره " }}
+                {{ userList[1]?.roomnumber }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">سمت</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ userList[1]?.userofficial }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">تلفن محل کار</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{ userList[1]?.userlandlinephonenumber }}
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">آدرس</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">تبریز - دانشگاه آزاد</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

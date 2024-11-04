@@ -1,0 +1,174 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+
+  <a routerLink="/buildingSupporters"> پشتیبانان</a>
+</div>
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+<div class="choose-supporter-form" *ngIf="showChooseSupporterForm">
+  <form [formGroup]="editSupporterForm" (ngSubmit)="onSubmitChooseSupporter()">
+    <div class="form-group sub building">
+      <label hidden for="buildingid">ساختمان</label>
+      <input
+        hidden
+        type="txt"
+        id="buildingid"
+        class="form-control"
+        formControlName="buildingid"
+      />
+    </div>
+    <div class="form-group sub supporter">
+      <label for="old_supportername">پشتیبان فعلی</label>
+      <input
+        type="text"
+        id="old_supportername"
+        class="form-control"
+        formControlName="old_supportername"
+        readonly
+      />
+      <input
+        type="text"
+        id="old_supporterpersonalId"
+        class="form-control"
+        formControlName="old_supporterpersonalId"
+        readonly
+        hidden
+      />
+    </div>
+    <div class="form-group sub supporter">
+      <label for="new_supporterpersobalId">پشتیبان جدید</label>
+      <select
+        class="form-select"
+        id="new_supporterpersobalId"
+        formControlName="new_supporterpersobalId"
+      >
+        <option value="">انتخاب کنید</option>
+        <ng-container *ngFor="let userArray of userList; let index = index">
+          <option *ngFor="let user of userArray" [value]="user.userpersonalid">
+            {{ user.username }} {{ user.userlastname }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
+
+    <div class="form-group sub floor">
+      <label hidden for="floor">طبقه</label>
+      <input
+        hidden
+        type="txt"
+        id="floor"
+        class="form-control"
+        formControlName="floor"
+      />
+    </div>
+    <div class="passButtons">
+      <button type="submit" class="btn btn-primary">تایید</button>
+      <button type="button" class="btn btn-danger" (click)="closeForm()">
+        بستن
+      </button>
+    </div>
+  </form>
+</div>
+<div class="mat-elevation-z8">
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>فیلتر</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="محمد" #input />
+  </mat-form-field> -->
+
+  <table
+    mat-table
+    [dataSource]="supportersDataSource"
+    matSort
+    [dir]="'rtl'"
+    class="full-width-table"
+  >
+    <!-- User ID Column -->
+    <ng-container matColumnDef="userid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>کد کاربری</th>
+      <td mat-cell *matCellDef="let row">{{ row.userid }}</td>
+    </ng-container>
+
+    <!-- User Personal Id Column -->
+    <ng-container matColumnDef="userpersonalid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>کد پرسنلی</th>
+      <td mat-cell *matCellDef="let row">{{ row.userpersonalid }}</td>
+    </ng-container>
+
+    <!-- User Name Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>نام</th>
+      <td mat-cell *matCellDef="let row">{{ row.username }}</td>
+    </ng-container>
+
+    <!-- User Last Name Column -->
+    <ng-container matColumnDef="userlastname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>نام خانوادگی</th>
+      <td mat-cell *matCellDef="let row">{{ row.userlastname }}</td>
+    </ng-container>
+
+    <!-- Building Name Column -->
+    <ng-container matColumnDef="buildingname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ساختمان</th>
+      <td mat-cell *matCellDef="let row">{{ row.buildingname }}</td>
+    </ng-container>
+    <!-- Building ID Column -->
+    <ng-container matColumnDef="buildingid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>کد ساختمان</th>
+      <td mat-cell *matCellDef="let row">
+        {{ getBuildingId(row.buildingname) }}
+      </td>
+    </ng-container>
+    <!-- Availible Floor Column -->
+    <ng-container matColumnDef="availablefloor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>طبقه در اختیار</th>
+      <td mat-cell *matCellDef="let row">{{ row.availablefloor }}</td>
+    </ng-container>
+    <!-- Edit  Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ویرایش</th>
+      <td mat-cell *matCellDef="let supporter">
+        <button class="btn btn-primary" (click)="editSupporter(supporter)">
+          ویرایش
+        </button>
+      </td>
+    </ng-container>
+    <!-- Delete Button Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>حذف</th>
+      <td mat-cell *matCellDef="let supporter">
+        <button class="btn btn-danger" (click)="deleteSupporter(supporter)">
+          حذف
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [style.color]="row.color"
+    >
+      <td
+        mat-cell
+        *matCellDef="let row"
+        [style.background-color]="row.backgroundColor"
+      ></td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of buildings"
+    [showFirstLastButtons]="true"
+    [pageSize]="10"
+    [pageIndex]="0"
+  ></mat-paginator>
+  <div
+    class="backdrop"
+    *ngIf="showChooseSupporterForm"
+    (click)="closeForm()"
+  ></div>
+</div>

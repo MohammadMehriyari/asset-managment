@@ -1,0 +1,256 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+
+  <a routerLink="/prfeature">ویژگی کالا</a>
+</div>
+<div class="buttons">
+  <button
+    class="btn btn-primary rounded-pill px-3"
+    style="float: right; margin-right: 10px"
+    (click)="toggleView('form')"
+  >
+    ایجاد ویژگی کالا جدید
+  </button>
+</div>
+
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+<div *ngIf="currentStep === 1">
+  <!-- First step form -->
+  <form
+    class="form1"
+    *ngIf="showPropertyForm"
+    [formGroup]="firstStepForm"
+    (ngSubmit)="onSubmitFirstStep()"
+  >
+    <div class="container1">
+      <!-- Form fields for first step -->
+      <div class="row" style="margin-top: 40px">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="goodsattributestitle ">نام ویژگی کالا </label>
+            <input
+              dir="rtl"
+              type="text"
+              id="goodsattributestitle"
+              class="form-control"
+              formControlName="goodsattributestitle"
+              placeholder="اجباری"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label style="width: 200px" for="goodsattributestype"
+              >مقدار پیشفرض</label
+            >
+            <select
+              id="goodsattributestype"
+              class="select1"
+              formControlName="goodsattributestype"
+              placeholder="اجباری"
+            >
+              >
+              <option selected>انتخاب کنید</option>
+              <option value="1">دارد</option>
+              <option value="2">ندارد</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        *ngIf="!this.isEditing"
+        style="margin-left: 100px"
+      >
+        ثبت
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        *ngIf="this.isEditing"
+        style="margin-left: 100px"
+      >
+        ویرایش
+      </button>
+      <button type="button" class="btn btn-danger" (click)="closeForm()">
+        بستن
+      </button>
+    </div>
+  </form>
+</div>
+<div *ngIf="currentStep === 2">
+  <!-- Second step form -->
+  <form
+    class="form2"
+    (ngSubmit)="onSubmitSecondStep()"
+    *ngIf="showPropertyForm"
+    [formGroup]="secondStepForm"
+  >
+    <!-- Form fields for second step -->
+    <div class="container1">
+      <div class="subContainer">
+        <div class="row">
+          <div class="form-group">
+            <label for="goodsAttributesId"> کد ویژگی </label>
+            <input
+              type="text"
+              id="goodsAttributesId"
+              class="form-control"
+              formControlName="goodsAttributesId"
+              readonly
+            />
+          </div>
+        </div>
+        <div formArrayName="defaultAttributes">
+          <div
+            *ngFor="
+              let defaultAttribute of defaultAttributes.controls;
+              let i = index
+            "
+            [formGroupName]="i"
+          >
+            <div class="row">
+              <div class="form-group">
+                <label for="defaultattributes">صفت پیشفرض</label>
+                <input
+                  dir="rtl"
+                  type="text"
+                  id="defaultattributes"
+                  class="form-control"
+                  formControlName="defaultattributes"
+                  style="margin-left: 20px"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="sub btn btn-primary"
+            (click)="addNewDefaultAttribute()"
+          >
+            +
+          </button>
+        </div>
+
+        <!--  col-md-6   -->
+        <div>
+          <div class="buttons">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              *ngIf="!this.isEditing"
+              style="margin-left: 100px"
+            >
+              تایید نهایی
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              *ngIf="this.isEditing"
+              style="margin-left: 100px"
+            >
+              ویرایش
+            </button>
+            <button type="button" class="btn btn-danger" (click)="closeForm()">
+              بستن
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="mat-elevation-z8" *ngIf="showPropertyTable">
+  <!-- <mat-form-field>
+    <mat-label>فیلتر</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="فنی" #input />
+  </mat-form-field> -->
+  <table
+    mat-table
+    [dataSource]="propertyDataSource"
+    matSort
+    [dir]="'rtl'"
+    class="full-width-table"
+  >
+    <!-- Goodsattributesid ID Column -->
+    <ng-container matColumnDef="goodsattributesid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>کد</th>
+      <td mat-cell *matCellDef="let row">{{ row.goodsattributesid }}</td>
+    </ng-container>
+
+    <!-- Goodsattributestitle Name Column -->
+    <ng-container matColumnDef="goodsattributestitle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>نام</th>
+      <td mat-cell *matCellDef="let row">{{ row.goodsattributestitle }}</td>
+    </ng-container>
+    <!-- goodsattributescreatetime   Column -->
+    <ng-container matColumnDef="goodsattributescreatetime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ایجاد</th>
+      <td mat-cell *matCellDef="let row">
+        {{ convertDate(row.goodsattributescreatetime) }}
+      </td>
+    </ng-container>
+    <!-- goodsattributesupdatetime  Column -->
+    <ng-container matColumnDef="goodsattributesupdatetime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ویرایش</th>
+      <td mat-cell *matCellDef="let row">
+        {{ convertDate(row.goodsattributesupdatetime) }}
+      </td>
+    </ng-container>
+    <!-- Goodsattributestype Name Column -->
+    <ng-container matColumnDef="goodsattributestype">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>مقدار پیشفرض</th>
+      <td mat-cell *matCellDef="let row">
+        {{ getDefaultValuename(row.goodsattributestype) }}
+      </td>
+    </ng-container>
+    <!-- Edit button column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>ویرایش</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="btn btn-primary"
+          (click)="editAttribute(row.goodsattributesid)"
+        >
+          ویرایش
+        </button>
+      </td>
+    </ng-container>
+    <!-- Delete Button Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>حذف</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="btn btn-danger"
+          (click)="deleteAttribute(row.goodsattributesid)"
+        >
+          حذف
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="viewDefaults">
+      <th mat-header-cell *matHeaderCellDef>مشاهده پیشفرض‌ها</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          class="btn btn-info"
+          (click)="viewDefaults(row.goodsattributesid)"
+        >
+          مشاهده پیشفرض‌ها
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of buildings"
+  ></mat-paginator>
+</div>

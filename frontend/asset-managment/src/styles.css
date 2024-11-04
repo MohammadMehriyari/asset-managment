@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-indigo/theme.css";
+@import "primeng/resources/primeng.min.css";
+@import "primeng/resources/themes/lara-light-indigo/theme.css";
+@font-face {
+  font-family: "Iran-Yekan-Regular";
+  src: url("/assets/Fonts/iranyekanwebregularfanum.ttf");
+}
+
+@font-face {
+  font-family: "Iran-Yekan-Bold";
+  src: url("/assets/Fonts/iranyekanwebboldfanum.ttf");
+}
+
+@font-face {
+  font-family: "Iran-Yekan-Light";
+  src: url("/assets/Fonts/iranyekanweblightfanum.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Iran-Yekan-Regular, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Iran-Yekan-Regular, "Helvetica Neue", sans-serif;
+}
+
+/* html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+} */

@@ -1,0 +1,280 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+
+  <a routerLink="/buildings"> ساختمان ها</a>
+</div>
+<div class="buttons">
+  <button
+    class="btn btn-primary rounded-pill px-3"
+    style="float: right; margin-right: 10px"
+    (click)="toggleView('form')"
+  >
+    ایجاد ساختمان جدید
+  </button>
+</div>
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+<div class="choose-supporter-form" *ngIf="showChooseSupporterForm">
+  <form
+    [formGroup]="chooseSupporterForm"
+    (ngSubmit)="onSubmitChooseSupporter()"
+  >
+    <div class="form-group supporter">
+      <label for="userpersonalid" style="width: 80px">پشتیبان</label>
+      <p-dropdown
+        id="userpersonalid"
+        formControlName="userpersonalid"
+        [options]="userOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="انتخاب کنید"
+        styleClass="prime-dropdown"
+        filterPlaceholder="جستجو"
+        [filter]="true"
+        [showClear]="true"
+      ></p-dropdown>
+      <!-- <label for="userpersonalid">پشتیبان</label>
+      <select
+        class="form-select"
+        id="userpersonalid"
+        formControlName="userpersonalid"
+      >
+        <option value="">انتخاب کنید</option>
+        <ng-container *ngFor="let userArray of userList; let index = index">
+          <option *ngFor="let user of userArray" [value]="user.userpersonalid">
+            {{ user.username }} {{ user.userlastname }}
+          </option>
+        </ng-container>
+      </select> -->
+    </div>
+    <div class="form-group building">
+      <label for="buildingid">ساختمان</label>
+      <input
+        type="text"
+        id="buildingid"
+        class="form-control"
+        formControlName="buildingid"
+        readonly
+        required
+        style="text-align: center"
+      />
+    </div>
+    <div class="form-group floor">
+      <label for="floor">طبقه</label>
+
+      <form [formGroup]="chooseSupporterForm">
+        <mat-form-field
+          class="customSelect"
+          appearance="outline"
+          floatLabel="always"
+        >
+          <mat-select formControlName="floor" multiple disableOptionCentering>
+            <mat-option
+              class="fontSize"
+              *ngFor="let floor of floorOptions"
+              [value]="floor"
+              >{{ floor }}</mat-option
+            >
+            <mat-option class="fontSize" value="all">همه</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="passButtons">
+      <button type="submit" class="btn btn-primary">تایید</button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="closeChooseSupporterForm()"
+      >
+        بستن
+      </button>
+    </div>
+  </form>
+</div>
+<!-- Building Form -->
+<div>
+  <form
+    class="form1"
+    *ngIf="showBuildingForm"
+    [formGroup]="buildingForm"
+    (ngSubmit)="onSubmitBuildingForm()"
+  >
+    <div class="row main">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="buildingfloorcount">تعداد طبقات </label>
+          <input
+            type="text"
+            id="buildingfloorcount"
+            class="form-control"
+            formControlName="buildingfloorcount"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="buildingabbrivationname">نام اختصاری </label>
+          <input
+            dir="rtl"
+            type="text"
+            id="buildingabbrivationname"
+            class="form-control"
+            formControlName="buildingabbrivationname"
+          />
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="buildingname">نام </label>
+          <input
+            dir="rtl"
+            type="text"
+            id="buildingname"
+            class="form-control"
+            formControlName="buildingname"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="buildingroomcount">تعداد اتاق</label>
+          <input
+            type="text"
+            id="buildingroomcount"
+            class="form-control"
+            formControlName="buildingroomcount"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="buttons2">
+      <button type="submit" class="btn btn-primary">
+        {{ this.isEditing ? "ویرایش" : "ثبت" }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="closeBuildingForm()"
+      >
+        بستن
+      </button>
+    </div>
+  </form>
+
+  <!-- Buildings Table -->
+  <div class="mat-elevation-z8" *ngIf="showBuildingsTable">
+    <!-- <mat-form-field>
+      <mat-label>فیلتر</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="فنی" #input />
+    </mat-form-field> -->
+    <table
+      mat-table
+      [dataSource]="buildingsDataSource"
+      matSort
+      [dir]="'rtl'"
+      class="full-width-table"
+    >
+      <!-- Building ID Column -->
+      <ng-container matColumnDef="buildingid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>کد</th>
+        <td mat-cell *matCellDef="let row">{{ row.buildingid }}</td>
+      </ng-container>
+
+      <!-- Building Name Column -->
+      <ng-container matColumnDef="buildingname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>نام</th>
+        <td mat-cell *matCellDef="let row">{{ row.buildingname }}</td>
+      </ng-container>
+
+      <!-- Building Abbreviation Column -->
+      <ng-container matColumnDef="buildingabbrivationname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>نام اختصاری</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.buildingabbrivationname }}
+        </td>
+      </ng-container>
+
+      <!-- Building Floor Count Column -->
+      <ng-container matColumnDef="buildingfloorcount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تعداد طبقات</th>
+        <td mat-cell *matCellDef="let row">{{ row.buildingfloorcount }}</td>
+      </ng-container>
+
+      <!-- Building Room Count Column -->
+      <ng-container matColumnDef="buildingroomcount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تعداد اتاق</th>
+        <td mat-cell *matCellDef="let row">{{ row.buildingroomcount }}</td>
+      </ng-container>
+      <!-- Building buildingcreatetime  Column -->
+      <ng-container matColumnDef="buildingcreatetime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ایجاد</th>
+        <td mat-cell *matCellDef="let row">
+          {{ convertDate(row.buildingupdatetime) }}
+        </td>
+      </ng-container>
+      <!-- Building buildingupdatetime Column -->
+      <ng-container matColumnDef="buildingupdatetime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ویرایش</th>
+        <td mat-cell *matCellDef="let row">
+          {{ convertDate(row.buildingupdatetime) }}
+        </td>
+      </ng-container>
+      <!-- Edit button column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>ویرایش</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            class="btn btn-primary"
+            (click)="editBuilding(row.buildingid)"
+          >
+            ویرایش
+          </button>
+        </td>
+      </ng-container>
+      <!-- Delete Button Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>حذف</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            class="btn btn-danger"
+            (click)="deleteBuilding(row.buildingid)"
+          >
+            حذف
+          </button>
+        </td>
+      </ng-container>
+      <!-- Supporter Button Column -->
+      <ng-container matColumnDef="selectSupporter">
+        <th mat-header-cell *matHeaderCellDef>پشتیبان</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            class="btn btn-success"
+            (click)="openChooseSupporterForm(row.buildingid)"
+          >
+            انتخاب
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of buildings"
+    ></mat-paginator>
+    <div
+      class="backdrop"
+      *ngIf="showChooseSupporterForm"
+      (click)="closeChooseSupporterForm()"
+    ></div>
+  </div>
+</div>

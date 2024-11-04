@@ -1,0 +1,133 @@
+<as-header></as-header>
+<div class="address">
+  <a routerLink="/panel">صفحه اصلی </a>
+  <span>&nbsp;/&nbsp;</span>
+
+  <a routerLink="/op"> سیستم عامل </a>
+</div>
+<div>
+  <button
+    class="btn btn-primary rounded-pill px-3"
+    style="float: right; margin-right: 10px"
+    (click)="toggleView('form')"
+  >
+    ایجاد سیستم عامل جدید
+  </button>
+</div>
+<div class="message-container" *ngIf="showMessage">
+  <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+<div>
+  <form
+    class="form1"
+    *ngIf="showOpForm"
+    [formGroup]="opForm"
+    (ngSubmit)="onSubmitOpForm()"
+  >
+    <div class="container1">
+      <div class="sub1">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="operationsystemname"> نام سیستم عامل </label>
+            <input
+              dir="rtl"
+              type="text"
+              id="operationsystemname"
+              class="form-control"
+              formControlName="operationsystemname"
+              placeholder="باید بیشتر از 1 حرف باشد"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="buttons2">
+        <button type="submit" class="btn btn-primary">
+          {{ this.isEditing ? "ویرایش" : "ثبت" }}
+        </button>
+        <button type="button" class="btn btn-danger" (click)="closeOpForm()">
+          بستن
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Op Table -->
+  <div class="mat-elevation-z8" *ngIf="showOpTable">
+    <!-- <mat-form-field>
+      <mat-label>فیلتر</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="ویندوز"
+        #input
+      />
+    </mat-form-field> -->
+    <table
+      mat-table
+      [dataSource]="opDataSource"
+      matSort
+      [dir]="'rtl'"
+      class="full-width-table"
+    >
+      <!-- oOp ID Column -->
+      <ng-container matColumnDef="operationsystemid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>کد</th>
+        <td mat-cell *matCellDef="let row">{{ row.operationsystemid }}</td>
+      </ng-container>
+
+      <!-- op Name Column -->
+      <ng-container matColumnDef="operationsystemname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>نام</th>
+        <td mat-cell *matCellDef="let row">{{ row.operationsystemname }}</td>
+      </ng-container>
+      <!--  operationsystemcreatetime  Column -->
+      <ng-container matColumnDef="operationsystemcreatetime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ایجاد</th>
+        <td mat-cell *matCellDef="let row">
+          {{ convertDate(row.operationsystemcreatetime) }}
+        </td>
+      </ng-container>
+      <!-- operationsystemupdatetime Column -->
+      <ng-container matColumnDef="operationsystemupdatetime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ ویرایش</th>
+        <td mat-cell *matCellDef="let row">
+          {{ convertDate(row.operationsystemupdatetime) }}
+        </td>
+      </ng-container>
+      <!-- Edit button column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>ویرایش</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            class="btn btn-primary"
+            (click)="editOp(row.operationsystemid)"
+          >
+            ویرایش
+          </button>
+        </td>
+      </ng-container>
+      <!-- Delete Button Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>حذف</th>
+        <td mat-cell *matCellDef="let row">
+          <button
+            class="btn btn-danger"
+            (click)="deleteOp(row.operationsystemid)"
+          >
+            حذف
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of buildings"
+    ></mat-paginator>
+  </div>
+</div>

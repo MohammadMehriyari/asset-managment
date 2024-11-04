@@ -1,0 +1,6 @@
+.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0 {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 0 !important;
+  margin-left: 200px;
+}

@@ -1,0 +1,93 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div class="login100-pic js-tilt" data-tilt>
+        <img src="assets/Images/as.login.png" alt="IMG" />
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <span class="login100-form-title"> ورود به سامانه </span>
+
+        <div
+          class="form-group"
+          class="wrap-input100 validate-input"
+          data-validate="Valid userid is required"
+        >
+          <input
+            lang="en"
+            class="input100"
+            type="text"
+            name="userpersonalid"
+            placeholder="کد کاربری"
+            formControlName="userpersonalid"
+          />
+
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <i class="fa fa-user" aria-hidden="true"></i>
+          </span>
+          <div
+            *ngIf="
+              loginForm.get('userpersonalid')?.invalid &&
+              (loginForm.get('userpersonalid')?.dirty ||
+                loginForm.get('userpersonalid')?.touched)
+            "
+            class="text-danger"
+          >
+            <div *ngIf="loginForm.get('userpersonalid')?.errors?.['required']">
+              کد کاربری را وارد نمایید.
+            </div>
+            <div
+              *ngIf="loginForm.get('userpersonalid')?.errors?.['invalidNumber'] && loginForm.get('userpersonalid')?.value !== ''"
+            >
+              کد کاربری باید به صورت عدد باشد.
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="form-group"
+          class="wrap-input100 validate-input"
+          data-validate="Password is required"
+        >
+          <input
+            class="input100"
+            [type]="showPassword.value ? 'text' : 'password'"
+            name="userpasword"
+            placeholder="رمز عبور"
+            formControlName="userpasword"
+          />
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <i class="fa fa-lock" aria-hidden="true"></i>
+          </span>
+          <label class="checkbox-container">
+            <input type="checkbox" formControlName="showPassword" />
+            <span class="checkmark"></span>
+          </label>
+
+          <div
+            *ngIf="
+              loginForm.get('userpasword')?.invalid &&
+              (loginForm.get('userpasword')?.dirty ||
+                loginForm.get('userpasword')?.touched)
+            "
+            class="text-danger"
+            style="padding-top: 5px"
+          >
+            رمز عبور را وارد نمایید
+          </div>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" [disabled]="loginForm.invalid">
+            ورود
+          </button>
+        </div>
+      </form>
+      <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+</div>

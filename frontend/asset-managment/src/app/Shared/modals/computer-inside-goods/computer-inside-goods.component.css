@@ -1,0 +1,48 @@
+/* message componnent */
+.message-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    background-color: #adc4e8;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    margin-bottom: 240px;
+  }
+  
+  .success {
+    color: rgb(5, 167, 5);
+  }
+  
+  .error {
+    color: red;
+  }
+  .mat-elevation-z8 {
+    box-shadow: none;
+  }
+  .dialog-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dialog-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+  }
+  
+  .dialog-content {
+    padding: 16px;
+  }
+  .center-text {
+    text-align: center !important;
+  }
+  .full-width-table td {
+    text-align: center;
+  }
+  

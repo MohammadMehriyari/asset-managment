@@ -1,0 +1,118 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.userPc-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Ensure it's on top of the backdrop */
+}
+.message-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: #adc4e8;
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+  margin-bottom: 240px;
+}
+
+.success {
+  color: rgb(5, 167, 5);
+}
+
+.error {
+  color: red;
+}
+.userPc-form .form-group {
+  margin-bottom: 15px;
+}
+
+.userPc-form .btn {
+  width: 100%;
+}
+.userPc-form label {
+  width: 225px;
+  text-align: end;
+}
+.passButtons {
+  justify-content: center;
+  display: flex;
+  padding-top: 20px;
+}
+.row.main {
+  margin-top: 100px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  padding: 30px 0 0 0;
+  padding-bottom: 50px;
+}
+.row {
+  justify-content: right;
+}
+.buttons2 {
+  margin-top: 50px;
+  margin-left: 4%;
+  display: flex;
+  justify-content: left;
+  flex-direction: row-reverse;
+}
+.container1 select {
+  word-wrap: normal;
+  margin-top: 20px;
+  width: 210px;
+  border-color: black;
+  border-radius: 9px;
+}
+label {
+  display: inline-block;
+  padding: 25px 20px 0 10px;
+  width: 180px;
+
+  height: 65px;
+}
+.form-group {
+  display: flex;
+  flex-direction: row-reverse;
+  max-width: 650px;
+}
+select option {
+  text-align: center;
+}
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.dialog-content {
+  padding: 16px;
+}
+.full-width-table td {
+  text-align: center;
+}
