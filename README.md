@@ -4,11 +4,10 @@
 [![Django Version](https://img.shields.io/badge/Django-4.x-blue.svg)](https://www.djangoproject.com/)
 [![MySQL Version](https://img.shields.io/badge/MySQL-8.x-lightblue.svg)](https://www.mysql.com/)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
-[![Open Issues](https://img.shields.io/github/issues/your-username/AssetManagement)](https://github.com/your-username/AssetManagement/issues)
-[![Closed Pull Requests](https://img.shields.io/github/issues-pr-closed/your-username/AssetManagement)](https://github.com/your-username/AssetManagement/pulls?q=is%3Apr+is%3Aclosed)
+
 
 ## Project Overview
 
@@ -70,16 +69,12 @@ bash ng serve
 
 ## Contributors
 
-- [Mohammad Mehriyari](https://github.com/mohammadmehriyari)
+- [Mohammad Mehriyari](https://github.com/MohammadMehriyari)
 - [Zahra1380](https://github.com/zahra1380)
 
-## Contributing
 
-We welcome contributions to AssetManagement! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for details on how to submit pull requests.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgments
 
