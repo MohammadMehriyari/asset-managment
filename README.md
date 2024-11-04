@@ -1,59 +1,87 @@
-AssetManagement
+# Asset Management System
 
+[![Angular Version](https://img.shields.io/badge/Angular-17.x-brightgreen.svg)](https://angular.io/)
+[![Django Version](https://img.shields.io/badge/Django-4.x-blue.svg)](https://www.djangoproject.com/)
+[![MySQL Version](https://img.shields.io/badge/MySQL-8.x-lightblue.svg)](https://www.mysql.com/)
 
-![image](https://github.com/user-attachments/assets/9f518b91-d041-4f81-b6c6-527359c014f6)
-![image](https://github.com/user-attachments/assets/4f9c6c93-351c-4cdf-b938-9b0bbda475b5)
-![image](https://github.com/user-attachments/assets/a5ec96a6-a4be-40d7-a765-0f74f12d44de)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
+[![Open Issues](https://img.shields.io/github/issues/your-username/AssetManagement)](https://github.com/your-username/AssetManagement/issues)
+[![Closed Pull Requests](https://img.shields.io/github/issues-pr-closed/your-username/AssetManagement)](https://github.com/your-username/AssetManagement/pulls?q=is%3Apr+is%3Aclosed)
 
+## Project Overview
 
+AssetManagement is a comprehensive university property management system designed to streamline asset tracking, user management, and maintenance operations. Developed in collaboration with Zahra1380, this project leverages cutting-edge web technologies to provide an efficient and user-friendly interface.
 
-This project was generated with [Angular CLI version 17.3.8.](https://github.com/angular/angular-cli) It is a collaborative project developed in partnership with [Zahra1380](https://github.com/Zahra1380). The front-end portion of this project is meticulously crafted using Angular version 17. Currently, version 1.0 of this project is complete, with exciting new updates on the horizon. We are committed to enhancing this project in future versions.
+### Key Features
 
-Project Overview
-AssetManagement is designed to streamline university property management. The system begins by capturing master data such as assets, users, buildings, zones, and more. Subsequently, it employs a ticketing feature to facilitate further operations. The system supports three user levels:
+- Master Data Management: Assets, Users, Buildings, Zones, and more
+- Ticketing System: Facilitates support and maintenance requests
+- Multi-level User Access Control:
+  - Admin: Full system access and control
+  - Support: Limited access for maintenance tasks
+  - Normal User: Restricted access for general users
 
-Admin: Full access and control over the system.
+### Technologies Used
 
-Support: Limited access for support and maintenance tasks.
+- Front-end: Angular (Version 17)
+- Back-end: Django
+- Database: MySQL
+- Containerization: Docker
 
-Normal User: Restricted access for regular users.
+## Getting Started
 
-Technologies Used
-Front-end: [Angular](https://angular.io/) (Version 17)
+This project uses Docker for easy deployment. Follow these steps to set up and run the project:
 
-Back-end: [Django](https://www.djangoproject.com/)
+1. **Prerequisites**
+   - Install Docker: Download from [here](https://www.docker.com/get-started)
+   - Ensure you have Docker Compose installed
 
-Database: [MySQL](https://www.mysql.com/)
-
-Getting Started
-This project is containerized using Docker. Follow these steps to get started:
-
-Install Docker: Ensure Docker is installed on your system. You can download it from here.
-
-Clone the Repository: Clone this repository to your local machine.
-
+2. **Clone the Repository**
 bash git clone https://github.com/your-username/AssetManagement.git
-[![Clone Repository](https://img.shields.io/badge/-Clone_Repository-blue?style=for-the-badge&logo=github)](https://github.com/MohammadMehriyari/asset-managment/.git)
-Build the Project: Navigate to the project directory and build the Docker containers using Docker Compose.
-
-sh
-Copy Code
-cd AssetManagement
-docker-compose build
-Run the Project: Start the containers with the following command:
-
-sh
-Copy Code
-docker-compose up
-Access the Application: Open your browser and navigate to http://localhost:4200/ to view the application.
-
-Development Server
-Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 
+3. **Build and Run the Project**
+bash cd AssetManagement docker-compose build docker-compose up
 
 
-Contributors
-[Mohammad Mehriyari](https://github.com/MohammadMehriyari)
-[Zahra1380](https://github.com/Zahra1380)
+4. **Access the Application**
+   Open your browser and navigate to [http://localhost:4200/](http://localhost:4200/)
+
+### Development Setup
+
+For local development:
+
+1. Install Node.js and npm
+2. Install Angular CLI globally:
+bash npm install -g @angular/cli
+
+3. Navigate to the project directory:
+bash cd AssetManagement/frontend
+
+4. Install dependencies:
+bash npm install
+
+5. Serve the application:
+bash ng serve
+
+   Navigate to [http://localhost:4200/](http://localhost:4200/) in your browser
+
+## Contributors
+
+- [Mohammad Mehriyari](https://github.com/mohammadmehriyari)
+- [Zahra1380](https://github.com/zahra1380)
+
+## Contributing
+
+We welcome contributions to AssetManagement! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for details on how to submit pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Acknowledgments
+
+- Special thanks to Zahra1380 for her invaluable contributions to this project
+- Thanks to the Angular and Django communities for their extensive documentation and support
