@@ -12,10 +12,11 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../Services/auth.service';
 import { HttpResponse } from '@angular/common/http';
+import { PasswordModule } from 'primeng/password';
 @Component({
   selector: 'as-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, PasswordModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

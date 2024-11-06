@@ -50,12 +50,20 @@
           class="wrap-input100 validate-input"
           data-validate="Password is required"
         >
-          <input
+          <!-- <input
             class="input100"
             [type]="showPassword.value ? 'text' : 'password'"
             name="userpasword"
             placeholder="رمز عبور"
             formControlName="userpasword"
+          /> -->
+          <p-password
+            formControlName="userpasword"
+            placeholder="رمز عبور"
+            name="userpasword"
+            [toggleMask]="true"
+            [feedback]="false"
+            styleClass="prime-input"
           />
           <span class="focus-input100"></span>
           <span class="symbol-input100">
@@ -63,7 +71,6 @@
           </span>
           <label class="checkbox-container">
             <input type="checkbox" formControlName="showPassword" />
-            <span class="checkmark"></span>
           </label>
 
           <div

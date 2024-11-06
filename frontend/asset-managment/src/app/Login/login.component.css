@@ -489,3 +489,87 @@ iframe {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+:host {
+  ::ng-deep .prime-input input {
+    font-family: Iran-Yekan-Regular;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666666;
+    display: block;
+    width: 100%;
+    background: #e6e6e6;
+    height: 50px;
+    border-radius: 25px;
+    padding: 0 30px 0 68px;
+  }
+  ::ng-deep .prime-input input:focus {
+    border-color: transparent !important;
+  }
+
+  ::ng-deep .prime-input input:focus:-moz-placeholder {
+    color: transparent;
+  }
+  ::ng-deep .prime-input input:focus::-moz-placeholder {
+    color: transparent;
+  }
+  ::ng-deep .prime-input input:focus:-ms-input-placeholder {
+    color: transparent;
+  }
+
+  ::ng-deep .prime-input input::-webkit-input-placeholder {
+    color: #999999;
+  }
+  ::ng-deep .prime-input input:-moz-placeholder {
+    color: #999999;
+  }
+  ::ng-deep .prime-input input::-moz-placeholder {
+    color: #999999;
+  }
+  ::ng-deep .prime-input input:-ms-input-placeholder {
+    color: #999999;
+  }
+  ::ng-deep .prime-input input::placeholder {
+    text-align: center;
+    font-size: 13px;
+    color: #393939;
+  }
+  ::ng-deep .prime-input .focus-input100 {
+    display: block;
+    position: absolute;
+    border-radius: 25px;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 0px 0px;
+    color: rgba(87, 184, 70, 0.8);
+  }
+}
+::ng-deep .prime-input .p-icon {
+  transform: translate(-8px, -8px);
+}
+/* :host {
+  ::ng-deep .prime-dropdown span {
+    text-align: center;
+    padding: 5px;
+  }
+  ::ng-deep .prime-dropdown input {
+    padding: 7px;
+    margin-bottom: 5p;
+    direction: rtl;
+  }
+  ::ng-deep .prime-dropdown .p-dropdown-filter-icon {
+    transform: translate(-210px, -8px);
+  }
+  ::ng-deep .prime-dropdown ul {
+    text-align: center;
+    padding: 0;
+  }
+  ::ng-deep .prime-dropdown li {
+    padding-bottom: 10px;
+  }
+  ::ng-deep .prime-dropdown .p-dropdown-clear-icon.p-icon {
+    transform: translate(0, -6px);
+  }
+} */
