@@ -38,7 +38,7 @@ This project uses Docker for easy deployment. Follow these steps to set up and r
    - Ensure you have Docker Compose installed
 
 2. **Clone the Repository**
-bash git clone https://github.com/your-username/AssetManagement.git
+bash git clone https://github.com/MohammadMehriyari/AssetManagement.git
 
 
 3. **Build and Run the Project**
