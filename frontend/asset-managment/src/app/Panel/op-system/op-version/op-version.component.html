@@ -29,28 +29,13 @@
       <div class="col-md-6">
         <div class="form-group">
           <label class="os-label" for="osId"> سیستم عامل</label>
-          <p-dropdown
-            [options]="osList"
-            optionLabel="operationsystemname"
-            formControlName="osId"
-            optionValue="operationsystemid"
-            [filter]="true"
-            [showClear]="true"
-            filterPlaceholder="جستجو"
-            styleClass="prime-dropdown"
-          ></p-dropdown>
-        </div>
-      </div>
-      <!-- <div class="col-md-6">
-        <div class="form-group">
-          <label class="os-label" for="osId"> سیستم عامل</label>
           <select id="osId" class="select1" formControlName="osId">
             <option *ngFor="let os of osList" [value]="os.operationsystemid">
               {{ os.operationsystemname }}
             </option>
           </select>
         </div>
-      </div> -->
+      </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="operationsystemversionname"> ورژن سیستم عامل </label>
@@ -60,7 +45,7 @@
             id="operationsystemversionname"
             class="form-control"
             formControlName="operationsystemversionname"
-            placeholder="باید بیشتر از 1 حرف باشد"
+            placeholder="حداقل یک حرف"
             required
           />
         </div>

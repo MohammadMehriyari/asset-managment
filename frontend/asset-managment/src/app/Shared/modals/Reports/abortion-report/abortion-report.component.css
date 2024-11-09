@@ -27,8 +27,6 @@ input {
   width: 270px;
   margin-left: 50px;
   text-align: center;
-  border-color: black;
-  border-radius: 9px;
 }
 label {
   display: inline-block;

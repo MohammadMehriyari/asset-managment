@@ -27,26 +27,6 @@
     <div class="container1">
       <div class="row">
         <div class="form-group">
-          <label class="os-label" style="width: 90px" for="ownerUserId">
-            کاربر
-          </label>
-          <p-dropdown
-            [options]="userList"
-            optionLabel="userlastname"
-            formControlName="ownerUserId"
-            optionValue="userid"
-            [filter]="true"
-            [showClear]="true"
-            filterPlaceholder="جستجو"
-            styleClass="prime-dropdown"
-          >
-            <ng-template let-user pTemplate="item">
-              <span>{{ user.username }} {{ user.userlastname }}</span>
-            </ng-template></p-dropdown
-          >
-        </div>
-
-        <!-- <div class="form-group">
           <label style="width: 90px" for="ownerUserId">کاربر </label>
           <select
             id="ownerUserId"
@@ -59,7 +39,7 @@
               {{ user.username }} {{ user.userlastname }}
             </option>
           </select>
-        </div> -->
+        </div>
       </div>
       <div class="row">
         <div class="form-group">
@@ -137,21 +117,6 @@
 
         <div class="col-md-6" style="width: 24%">
           <div class="form-group">
-            <label class="label" style="width: 120px" for="GoodsId">
-              کالا</label
-            >
-            <p-dropdown
-              [options]="goodsList"
-              optionLabel="goodsname"
-              formControlName="GoodsId"
-              optionValue="goodsid"
-              filter="true"
-              showClear="true"
-              filterPlaceholder="جستجو"
-              styleClass="prime-dropdown"
-            ></p-dropdown>
-          </div>
-          <!-- <div class="form-group">
             <label style="width: 120px" for="GoodsId">کالا </label>
             <select
               id="GoodsId"
@@ -164,7 +129,7 @@
                 {{ goods.goodsname }}
               </option>
             </select>
-          </div> -->
+          </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
@@ -212,19 +177,6 @@
       <div class="row" style="margin-top: 40px">
         <div class="col-md-6">
           <div class="form-group">
-            <label class="label" for="computerpropertynumber"> کامپیوتر</label>
-            <p-dropdown
-              [options]="computerList"
-              optionLabel="computername"
-              formControlName="computerpropertynumber"
-              optionValue="computerpropertynumber"
-              filter="true"
-              showClear="true"
-              filterPlaceholder="جستجو"
-              styleClass="prime-dropdown"
-            ></p-dropdown>
-          </div>
-          <!-- <div class="form-group">
             <label for="computerpropertynumber"> کامپیوتر</label>
             <select
               id="computerpropertynumber"
@@ -238,7 +190,7 @@
                 {{ computer.computername }}
               </option>
             </select>
-          </div> -->
+          </div>
         </div>
       </div>
       <div>

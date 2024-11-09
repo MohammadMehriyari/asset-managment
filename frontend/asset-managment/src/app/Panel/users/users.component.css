@@ -19,7 +19,7 @@ input {
   display: inline;
   margin-top: 20px;
 
-  max-width: 350px;
+  max-width: 250px;
   margin-left: 50px;
   border-color: black;
   border-radius: 9px;
@@ -59,8 +59,7 @@ label {
 .select1 {
   word-wrap: normal;
   margin-top: 20px;
-  width: 300px;
-  border-color: black;
+  width: 250px;
   border-radius: 9px;
 }
 /* message componnent */
@@ -156,37 +155,4 @@ th {
   top: 0; /* Adjust this value if you have any other elements above the table */
   background: white; /* Ensure the header has a background color */
   z-index: 100; /* Ensure the header stays on top */
-}
-:host {
-  ::ng-deep .prime-dropdown {
-    border-color: black;
-    border-radius: 9px;
-    width: 300px;
-    margin-top: 20px;
-    padding: 5px;
-  }
-}
-:host {
-  ::ng-deep .prime-dropdown span {
-    text-align: center;
-    padding: 5px;
-  }
-  ::ng-deep .prime-dropdown input {
-    padding: 7px;
-    margin-bottom: 5p;
-    direction: rtl;
-  }
-  ::ng-deep .prime-dropdown .p-dropdown-filter-icon {
-    transform: translate(-260px, -6px);
-  }
-  ::ng-deep .prime-dropdown ul {
-    text-align: center;
-    padding: 0;
-  }
-  ::ng-deep .prime-dropdown li {
-    padding-bottom: 10px;
-  }
-  ::ng-deep .prime-dropdown .p-dropdown-clear-icon.p-icon {
-    transform: translate(0, -6px);
-  }
 }

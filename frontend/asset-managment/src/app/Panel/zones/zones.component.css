@@ -18,10 +18,10 @@ input {
   display: inline;
   margin-top: 20px;
 
-  max-width: 350px;
-  margin-left: 50px;
+  max-width: 250px;
   border-color: black;
   border-radius: 9px;
+  margin-left: 50px;
 }
 label {
   display: inline-block;

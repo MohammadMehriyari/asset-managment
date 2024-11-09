@@ -13,16 +13,13 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
-  FormControl,
 } from '@angular/forms';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalsComponent } from '../../../Shared/modals/modals.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import moment from 'jalali-moment';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
+
 @Component({
   selector: 'as-op-version',
   standalone: true,
@@ -38,8 +35,6 @@ import { DropdownModule } from 'primeng/dropdown';
     MatInputModule,
     RouterLink,
     RouterModule,
-    FormsModule,
-    DropdownModule,
   ],
   templateUrl: './op-version.component.html',
   styleUrl: './op-version.component.css',
@@ -268,7 +263,7 @@ export class OpVersionComponent implements OnInit {
     this.showMessage = true;
     setTimeout(() => {
       this.showMessage = false;
-    }, 3000); // Hide message after 1minute
+    }, 10000); // Hide message after 1minute
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

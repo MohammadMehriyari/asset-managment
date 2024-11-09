@@ -18,10 +18,10 @@ input {
   display: inline;
   margin-top: 20px;
 
-  max-width: 270px;
-  margin-left: 50px;
+  max-width: 250px;
   border-color: black;
   border-radius: 9px;
+  margin-left: 50px;
 }
 label {
   display: inline-block;
@@ -63,7 +63,6 @@ label {
   word-wrap: normal;
   margin-top: 20px;
   width: 348px;
-  border-color: black;
   border-radius: 9px;
 }
 /* message componnent */
@@ -174,38 +173,5 @@ th {
   width: 90px;
 }
 .container2 select {
-  width: 270px;
-}
-:host {
-  ::ng-deep .prime-dropdown {
-    border-color: black;
-    border-radius: 9px;
-    width: 250px;
-    margin-top: 20px;
-    padding: 5px;
-  }
-}
-:host {
-  ::ng-deep .prime-dropdown span {
-    text-align: center;
-    padding: 5px;
-  }
-  ::ng-deep .prime-dropdown input {
-    padding: 7px;
-    margin-bottom: 5p;
-    direction: rtl;
-  }
-  ::ng-deep .prime-dropdown .p-dropdown-filter-icon {
-    transform: translate(-260px, -6px);
-  }
-  ::ng-deep .prime-dropdown ul {
-    text-align: center;
-    padding: 0;
-  }
-  ::ng-deep .prime-dropdown li {
-    padding-bottom: 10px;
-  }
-  ::ng-deep .prime-dropdown .p-dropdown-clear-icon.p-icon {
-    transform: translate(0, -6px);
-  }
+  width: 250px;
 }

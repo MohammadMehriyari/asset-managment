@@ -25,7 +25,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { PcUserComponent } from '../../Shared/modals/pc-user/pc-user.component';
 import { UsersComputerDetailComponent } from '../../Shared/modals/users-computer-detail/users-computer-detail.component';
 import { ComputerDetailComponent } from '../../Shared/modals/computer-detail/computer-detail.component';
-import { DropdownModule } from 'primeng/dropdown';
+
 @Component({
   selector: 'as-computer',
   standalone: true,
@@ -41,7 +41,6 @@ import { DropdownModule } from 'primeng/dropdown';
     MatInputModule,
     RouterLink,
     RouterModule,
-    DropdownModule,
   ],
   templateUrl: './computer.component.html',
   styleUrl: './computer.component.css',
@@ -86,7 +85,6 @@ export class ComputerComponent implements OnInit {
   ngOnInit(): void {
     this.fetchComputer();
     this.fetchUserList();
-
     this.showComputerTable = true;
     this.computerForm = this.fb.group({
       computerpropertynumber: ['', Validators.required],
@@ -306,8 +304,11 @@ export class ComputerComponent implements OnInit {
       this.showMessage = false;
     }, 3000);
   }
-  onOsNameChange(event: any) {
-    const selectedOsId = event.value;
+  onOsNameChange(event: Event): void {
+    const selectedOsId = parseInt(
+      (event.target as HTMLSelectElement).value,
+      10
+    );
     const selectedOs = this.osList.find(
       (os) => os.operationsystemid === selectedOsId
     );

@@ -26,7 +26,6 @@ import { ModalsComponent } from '../../Shared/modals/modals.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import { SealPcComponent } from '../../Shared/modals/seal-pc/seal-pc.component';
 import moment from 'jalali-moment';
-import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'as-seal',
@@ -45,7 +44,6 @@ import { DropdownModule } from 'primeng/dropdown';
     MatButtonModule,
     RouterLink,
     RouterModule,
-    DropdownModule,
   ],
   templateUrl: './seal.component.html',
   styleUrl: './seal.component.css',

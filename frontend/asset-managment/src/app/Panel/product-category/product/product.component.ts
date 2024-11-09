@@ -21,7 +21,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalsComponent } from '../../../Shared/modals/modals.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import moment from 'jalali-moment';
-import { DropdownModule } from 'primeng/dropdown';
 @Component({
   selector: 'as-product',
   standalone: true,
@@ -39,7 +38,6 @@ import { DropdownModule } from 'primeng/dropdown';
     MatButtonModule,
     RouterLink,
     RouterModule,
-    DropdownModule,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css',

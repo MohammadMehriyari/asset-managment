@@ -19,10 +19,10 @@ input {
   display: inline;
   margin-top: 20px;
 
-  max-width: 350px;
-  margin-left: 50px;
+  max-width: 250px;
   border-color: black;
   border-radius: 9px;
+  margin-left: 50px;
 }
 label {
   display: inline-block;
@@ -47,6 +47,7 @@ label {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
   padding: 30px 0 0 0;
   padding-bottom: 50px;
+  flex-direction: row-reverse;
 }
 .row {
   justify-content: right;
@@ -60,7 +61,6 @@ label {
   margin-top: 20px;
   width: 200px;
   border-radius: 9px;
-  border-color: black;
 }
 /* message componnent */
 .message-container {
@@ -180,41 +180,10 @@ option {
 .customSelect {
   width: 285px;
 }
-
 th {
   color: #0d00ff;
   font-size: 15px;
 }
-:host {
-  ::ng-deep .prime-dropdown {
-    border-color: black;
-    border-radius: 9px;
-    width: 280px;
-    margin-top: 20px;
-    padding: 9px;
-  }
-}
-:host {
-  ::ng-deep .prime-dropdown span {
-    text-align: center;
-    padding: 5px;
-  }
-  ::ng-deep .prime-dropdown input {
-    padding: 7px;
-    margin-bottom: 5p;
-    direction: rtl;
-  }
-  ::ng-deep .prime-dropdown .p-dropdown-filter-icon {
-    transform: translate(-210px, -8px);
-  }
-  ::ng-deep .prime-dropdown ul {
-    text-align: center;
-    padding: 0;
-  }
-  ::ng-deep .prime-dropdown li {
-    padding-bottom: 10px;
-  }
-  ::ng-deep .prime-dropdown .p-dropdown-clear-icon.p-icon {
-    transform: translate(0, -6px);
-  }
+::placeholder {
+  text-align: center;
 }

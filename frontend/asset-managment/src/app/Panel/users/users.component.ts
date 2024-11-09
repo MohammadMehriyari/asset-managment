@@ -26,7 +26,9 @@ import {
 import { UserDetailComponent } from '../../Shared/modals/user-detail/user-detail.component';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { UsersPropertyComponent } from '../../Shared/modals/users-property/users-property.component';
-import { DropdownModule } from 'primeng/dropdown';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FooterComponent } from '../../Shared/footer/footer.component';
+
 @Component({
   selector: 'as-users',
   standalone: true,
@@ -42,7 +44,7 @@ import { DropdownModule } from 'primeng/dropdown';
     CommonModule,
     RouterLink,
     RouterModule,
-    DropdownModule,
+    FooterComponent,
   ],
   providers: [provideAnimations()],
   templateUrl: './users.component.html',
@@ -53,6 +55,7 @@ export class UsersComponent implements OnInit {
   changePasswordForm!: FormGroup;
   showChangePasswordForm = false;
   isSupporter = false;
+  ifSupporter = false;
   isAdmin = false;
   isEditing = false;
   supporter_id = '';
@@ -115,6 +118,9 @@ export class UsersComponent implements OnInit {
       buildingId: ['', Validators.required],
       userofficial: ['', Validators.required],
       roomnumber: ['', Validators.required],
+    });
+    this.firstStepForm.get('userroleid')?.valueChanges.subscribe((value) => {
+      this.ifSupporter = value === '2';
     });
     this.changePasswordForm = this.fb.group({
       userpersonalid: ['', Validators.required],
@@ -313,8 +319,11 @@ export class UsersComponent implements OnInit {
               this.showMessages();
             },
 
-            error: (error) => {
-              console.error('Error submitting first step:', error);
+            error: (error: HttpErrorResponse) => {
+              console.error(
+                'Error submitting first step:',
+                error.error['non_field_errors']
+              );
 
               switch (true) {
                 case formValue.userroleid === 3 &&
@@ -327,8 +336,7 @@ export class UsersComponent implements OnInit {
                   this.errorMessage = ' سطح کاربری را انتخاب کنید';
                   break;
                 default:
-                  this.errorMessage =
-                    '.مشکلی در ارسال اطلاعات به وجود آمد ، لطفا دوباره امتحان کنید';
+                  this.errorMessage = error.error['non_field_errors'];
               }
 
               this.successMessage = '';
@@ -400,10 +408,12 @@ export class UsersComponent implements OnInit {
                 this.showMessages();
               }
             },
-            error: (error) => {
-              console.error('Error submitting second step:', error);
-              this.errorMessage =
-                'مشکلی در ارسال اطلاعات به وجود آمد ، لطفا دوباره امتحان کنید';
+            error: (error: HttpErrorResponse) => {
+              console.error(
+                'Error submitting first step:',
+                error.error['non_field_errors']
+              );
+              this.errorMessage = error.error['non_field_errors'];
               this.successMessage = '';
               this.showMessages();
             },
@@ -638,10 +648,12 @@ export class UsersComponent implements OnInit {
                 this.showMessages();
               }
             },
-            error: (error) => {
-              console.error('Error changing password:', error);
-              this.errorMessage =
-                'مشکلی در ارسال اطلاعات به وجود آمد ، لطفا دوباره امتحان کنید';
+            error: (error: HttpErrorResponse) => {
+              console.error(
+                'Error submitting first step:',
+                error.error['non_field_errors']
+              );
+              this.errorMessage = error.error['non_field_errors'];
               this.successMessage = '';
               this.showMessages();
             },

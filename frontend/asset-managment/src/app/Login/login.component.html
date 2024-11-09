@@ -1,3 +1,7 @@
+<link
+  rel="stylesheet"
+  href="/assets/font-awesome-4.7.0/css/font-awesome.min.css"
+/>
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
@@ -50,27 +54,29 @@
           class="wrap-input100 validate-input"
           data-validate="Password is required"
         >
-          <!-- <input
+          <input
             class="input100"
             [type]="showPassword.value ? 'text' : 'password'"
             name="userpasword"
             placeholder="رمز عبور"
             formControlName="userpasword"
-          /> -->
-          <p-password
-            formControlName="userpasword"
-            placeholder="رمز عبور"
-            name="userpasword"
-            [toggleMask]="true"
-            [feedback]="false"
-            styleClass="prime-input"
           />
           <span class="focus-input100"></span>
           <span class="symbol-input100">
             <i class="fa fa-lock" aria-hidden="true"></i>
           </span>
           <label class="checkbox-container">
+            <!-- <button
+              type="button"
+              id="btnToggle"
+              formControlName="showPassword"
+              class="toggle"
+            >
+              <i id="eyeIcon" class="fa fa-eye"></i>
+            </button> -->
             <input type="checkbox" formControlName="showPassword" />
+            <i id="eyeIcon" class="fa fa-eye"></i>
+            <!-- <span class="checkmark"></span> -->
           </label>
 
           <div

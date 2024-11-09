@@ -23,26 +23,6 @@
     <div class="container1">
       <div class="row">
         <div class="form-group">
-          <label class="os-label" style="width: 90px" for="ownerUserId">
-            کاربر
-          </label>
-          <p-dropdown
-            [options]="userList"
-            optionLabel="userlastname"
-            formControlName="ownerUserId"
-            optionValue="userid"
-            [filter]="true"
-            [showClear]="true"
-            filterPlaceholder="جستجو"
-            styleClass="prime-dropdown"
-          >
-            <ng-template let-user pTemplate="item">
-              <span>{{ user.username }} {{ user.userlastname }}</span>
-            </ng-template></p-dropdown
-          >
-        </div>
-
-        <!-- <div class="form-group">
           <label style="width: 90px" for="ownerUserId">کاربر </label>
           <select
             id="ownerUserId"
@@ -55,25 +35,9 @@
               {{ user.username }} {{ user.userlastname }}
             </option>
           </select>
-        </div> -->
+        </div>
       </div>
       <div class="row">
-        <!-- <div class="form-group">
-          <label class="label" style="width: 90px" for="buildingId"
-            >ساختمان</label
-          >
-          <p-dropdown
-            [options]="buildingList"
-            optionLabel="buildingname"
-            formControlName="buildingId"
-            optionValue="buildingid"
-            filter="true"
-            showClear="true"
-            filterPlaceholder="جستجو"
-            styleClass="prime-dropdown"
-          ></p-dropdown>
-        </div> -->
-
         <div class="form-group">
           <label style="width: 90px" for="buildingId">ساختمان </label>
           <select id="buildingId" class="select1" formControlName="buildingId">
@@ -89,22 +53,6 @@
         </div>
       </div>
       <div class="row">
-        <!-- <div class="form-group">
-          <label class="label" style="width: 90px" for="areaId">
-            سیستم عامل</label
-          >
-          <p-dropdown
-            [options]="areaList"
-            optionLabel="areaname"
-            formControlName="areaId"
-            optionValue="areaid"
-            [filter]="true"
-            [showClear]="true"
-            filterPlaceholder="جستجو"
-            styleClass="prime-dropdown"
-          ></p-dropdown>
-        </div> -->
-
         <div class="form-group">
           <label style="width: 90px" for="areaId">حوزه </label>
           <select id="areaId" class="select1" formControlName="areaId">
@@ -153,7 +101,6 @@
               <!-- حتما intger باشد -->
               <label for="computerpropertynumber"> شماره اموال</label>
               <input
-                dir="rtl"
                 type="text"
                 id="computerpropertynumber"
                 class="form-control"
@@ -192,7 +139,6 @@
             <div class="form-group">
               <label for="computerip"> IP </label>
               <input
-                dir="rtl"
                 type="text"
                 id="computerip"
                 class="form-control"
@@ -205,7 +151,6 @@
             <div class="form-group">
               <label for="computermacaddress"> MacAddress</label>
               <input
-                dir="rtl"
                 type="text"
                 id="computermacaddress"
                 class="form-control"
@@ -230,25 +175,7 @@
         <div class="sub1 gp3">
           <div class="col-md-6">
             <div class="form-group">
-              <label class="os-label" style="width: 120px" for="osName">
-                سیستم عامل</label
-              >
-              <p-dropdown
-                [options]="osList"
-                optionLabel="operationsystemname"
-                formControlName="osName"
-                optionValue="operationsystemid"
-                [filter]="true"
-                [showClear]="true"
-                filterPlaceholder="جستجو"
-                styleClass="prime-dropdown"
-                (onChange)="onOsNameChange($event)"
-              ></p-dropdown>
-            </div>
-          </div>
-          <!-- <div class="col-md-6">
-            <div class="form-group">
-              <label class="os-label" style="width: 120px" for="osName">
+              <label class="os-label" style="width: 90px" for="osName">
                 سیستم عامل</label
               >
               <select
@@ -265,27 +192,10 @@
                 </option>
               </select>
             </div>
-          </div> -->
+          </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label class="os-label" style="width: 160px" for="osVersionId">
-                ورژن سیستم عامل
-              </label>
-              <p-dropdown
-                [options]="selectedOsVersions"
-                optionLabel="operationsystemversionname"
-                formControlName="osVersionId"
-                optionValue="operationsystemversionid"
-                [filter]="true"
-                [showClear]="true"
-                filterPlaceholder="جستجو"
-                styleClass="prime-dropdown"
-              ></p-dropdown>
-            </div>
-          </div>
-          <!-- <div class="col-md-6">
-            <div class="form-group">
-              <label class="os-label" style="width: 160px" for="osVersionId">
+              <label class="os-label" style="width: 90px" for="osVersionId">
                 ورژن سیستم عامل</label
               >
               <select
@@ -301,7 +211,7 @@
                 </option>
               </select>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
       <div class="buttons2">

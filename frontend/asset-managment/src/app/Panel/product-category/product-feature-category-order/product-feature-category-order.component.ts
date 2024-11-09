@@ -19,7 +19,6 @@ import { map, Observable, tap } from 'rxjs';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ModalsComponent } from '../../../Shared/modals/modals.component';
 import moment from 'jalali-moment';
-import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'as-product-feature-category-order',
@@ -36,7 +35,6 @@ import { DropdownModule } from 'primeng/dropdown';
     CommonModule,
     RouterLink,
     RouterModule,
-    DropdownModule,
   ],
   templateUrl: './product-feature-category-order.component.html',
   styleUrl: './product-feature-category-order.component.css',

@@ -38,6 +38,7 @@ label {
   flex-direction: row-reverse;
   max-width: 650px;
   margin-bottom: 20px;
+  margin-right: 50px;
 }
 
 /* .col-md-6 {
@@ -67,7 +68,6 @@ label {
   word-wrap: normal;
   margin-top: 20px;
   width: 200px;
-  border-color: black;
   border-radius: 9px;
 }
 /* message componnent */
@@ -117,6 +117,8 @@ textarea {
   height: 200px;
   direction: rtl;
   padding: 10px;
+  border-color: black;
+  border-radius: 9px;
 }
 .form-check-input {
   margin-top: 28px;

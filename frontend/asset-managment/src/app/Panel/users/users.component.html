@@ -29,6 +29,7 @@
         class="form-control"
         formControlName="userpersonalid"
         readonly
+        style="text-align: center"
       />
     </div>
     <div class="form-group">
@@ -64,16 +65,15 @@
   >
     <div class="container1">
       <!-- Form fields for first step -->
-      <div class="row" style="margin-top: 40px">
+      <div class="row" style="margin-top: 40px; flex-direction: row-reverse">
         <div class="col-md-6">
           <div class="form-group">
-            <label for="userlastname ">نام خانوادگی</label>
+            <label for="userpersonalid">کد پرسنلی</label>
             <input
-              dir="rtl"
               type="text"
-              id="userlastname"
+              id="userpersonalid"
               class="form-control"
-              formControlName="userlastname"
+              formControlName="userpersonalid"
               placeholder="اجباری"
             />
           </div>
@@ -94,19 +94,54 @@
 
         <div class="col-md-6">
           <div class="form-group">
-            <label for="userpersonalid">کد پرسنلی</label>
+            <label for="userlastname ">نام خانوادگی</label>
             <input
+              dir="rtl"
               type="text"
-              id="userpersonalid"
+              id="userlastname"
               class="form-control"
-              formControlName="userpersonalid"
+              formControlName="userlastname"
               placeholder="اجباری"
             />
           </div>
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="flex-direction: row-reverse">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="userphonenumber">تلفن همراه</label>
+            <!-- <p-inputMask
+              type="txt"
+              id="userphonenumber"
+              formControlName="userphonenumber"
+              class="form-control"
+              placeholder="(041) 3-355-6531"
+            /> -->
+            <input
+              maxlength="11"
+              type="txt"
+              id="userphonenumber"
+              class="form-control"
+              formControlName="userphonenumber"
+              placeholder="0914-840-5234"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="userlandlinephonenumber">تلفن محل کار</label>
+            <input
+              maxlength="11"
+              type="text"
+              id="userlandlinephonenumber"
+              class="form-control"
+              formControlName="userlandlinephonenumber"
+              placeholder="041-33351121"
+              pattern="^0[1-8]{2}[0-9]{8}$"
+            />
+          </div>
+        </div>
         <div *ngIf="!this.isEditing" class="col-md-6">
           <div class="form-group">
             <label style="width: 120px" for="userroleid">سطح کاربری</label>
@@ -123,38 +158,11 @@
             </select>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="userlandlinephonenumber">تلفن محل کار</label>
-            <input
-              maxlength="11"
-              type="text"
-              id="userlandlinephonenumber"
-              class="form-control"
-              formControlName="userlandlinephonenumber"
-              placeholder="اجباری"
-              pattern="^0[1-8]{2}[0-9]{8}$"
-            />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="userphonenumber">تلفن همراه</label>
-            <input
-              maxlength="11"
-              type="txt"
-              id="userphonenumber"
-              class="form-control"
-              formControlName="userphonenumber"
-              placeholder="اجباری"
-            />
-          </div>
-        </div>
       </div>
       <div *ngIf="!(this.isEditing || this.isSupporter)" class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="!ifSupporter">
           <div class="form-group">
-            <label for="supporterid">کد پشتیبان</label>
+            <label for="supporterid">کد کاربری پشتیبان</label>
             <input
               type="text"
               id="supporterid"
@@ -198,7 +206,7 @@
     <!-- Form fields for second step -->
     <div class="container1">
       <div class="row" style="margin-top: 40px">
-        <!-- <div class="col-md-6">
+        <div class="col-md-6">
           <div class="form-group">
             <label for="areaId"> حوزه</label>
             <select id="areaId" class="select1" formControlName="areaId">
@@ -207,38 +215,8 @@
               </option>
             </select>
           </div>
-        </div> -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="areaId" for="areaId"> حوزه</label>
-            <p-dropdown
-              [options]="areaList"
-              optionLabel="areaname"
-              formControlName="areaId"
-              optionValue="areaid"
-              [filter]="true"
-              [showClear]="true"
-              filterPlaceholder="جستجو"
-              styleClass="prime-dropdown"
-            ></p-dropdown>
-          </div>
         </div>
         <div class="col-md-6">
-          <div class="form-group">
-            <label class="buildingId" for="buildingId"> ساختمان</label>
-            <p-dropdown
-              [options]="buildingList"
-              optionLabel="buildingname"
-              formControlName="buildingId"
-              optionValue="buildingid"
-              [filter]="true"
-              [showClear]="true"
-              filterPlaceholder="جستجو"
-              styleClass="prime-dropdown"
-            ></p-dropdown>
-          </div>
-        </div>
-        <!-- <div class="col-md-6">
           <div class="form-group">
             <label for="buildingId"> ساختمان</label>
             <select
@@ -254,7 +232,7 @@
               </option>
             </select>
           </div>
-        </div> -->
+        </div>
         <div class="col-md-6">
           <div class="form-group">
             <label for="userId">کد پرسنلی</label>

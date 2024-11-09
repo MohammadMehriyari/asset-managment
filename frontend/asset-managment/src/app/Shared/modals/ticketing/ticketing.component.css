@@ -24,8 +24,6 @@ input {
 
   max-width: 350px;
   margin-left: 50px;
-  border-color: black;
-  border-radius: 9px;
 }
 label {
   display: inline-block;
@@ -66,7 +64,6 @@ label {
   word-wrap: normal;
   margin-top: 20px;
   width: 200px;
-  border-color: black;
   border-radius: 9px;
 }
 /* message componnent */

@@ -34,7 +34,6 @@ import { AuthService } from '../../../Services/auth.service';
   selector: 'as-change-status',
   standalone: true,
   imports: [
-    HeaderComponent,
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
@@ -46,7 +45,6 @@ import { AuthService } from '../../../Services/auth.service';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    RouterLink,
     RouterModule,
     MatTabsModule,
   ],

@@ -67,8 +67,6 @@
 .supporter input,
 select {
   margin-bottom: 11px;
-  border-color: black;
-  border-radius: 9px;
 }
 .building label {
   display: inline-block;

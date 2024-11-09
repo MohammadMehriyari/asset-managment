@@ -60,4 +60,6 @@ label {
 }
 textarea {
   text-align: right;
+  border-color: black;
+  border-radius: 9px;
 }

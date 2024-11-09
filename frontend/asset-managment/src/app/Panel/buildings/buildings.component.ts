@@ -21,8 +21,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalsComponent } from '../../Shared/modals/modals.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import moment from 'jalali-moment';
-import { DropdownModule } from 'primeng/dropdown';
-import { MultiSelectModule } from 'primeng/multiselect';
 @Component({
   selector: 'app-buildings',
   standalone: true,
@@ -40,7 +38,6 @@ import { MultiSelectModule } from 'primeng/multiselect';
     MatButtonModule,
     RouterLink,
     RouterModule,
-    DropdownModule,
   ],
   templateUrl: './buildings.component.html',
   styleUrl: './buildings.component.css',
@@ -75,7 +72,6 @@ export class BuildingsComponent implements OnInit {
   isEditing = false;
   buildingId: any;
   userList: any[] = [];
-  userOptions: any[] = [];
   floorOptions: number[] = [];
   supporterList: any[] = [];
   constructor(
@@ -282,18 +278,8 @@ export class BuildingsComponent implements OnInit {
                 v.userpersonalid === value.userpersonalid
             ) === index
         );
-        // Map users to dropdown options
-        this.userOptions = filteredUsers.map(
-          (user: {
-            username: any;
-            userlastname: any;
-            userpersonalid: any;
-          }) => ({
-            label: `${user.username} ${user.userlastname}`,
-            value: user.userpersonalid,
-          })
-        );
-        console.log('Filtered Users:', this.userOptions);
+        this.userList.push(filteredUsers);
+        console.log('Filtered Users:', this.userList);
       }
     });
   }
@@ -361,7 +347,7 @@ export class BuildingsComponent implements OnInit {
             const floorNumber = selectedFloors.includes('all')
               ? 'همه'
               : selectedFloors[0];
-            this.errorMessage = `طبقه ${floorNumber}   دارای پشتیبان است`;
+            this.errorMessage = `طبقه ${floorNumber}  قبلا انتخاب شده است`;
             this.successMessage = '';
             this.showMessages();
           } else {

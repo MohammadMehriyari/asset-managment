@@ -18,10 +18,12 @@
 input {
   display: inline;
   margin-top: 20px;
-  width: 270px;
-  margin-left: 50px;
+
+  max-width: 200px;
   border-color: black;
   border-radius: 9px;
+  margin-left: 50px;
+  margin-right: 20px;
 }
 label {
   display: inline-block;
@@ -60,7 +62,6 @@ label {
   word-wrap: normal;
   margin-top: 20px;
   width: 200px;
-  border-color: black;
   border-radius: 9px;
 }
 /* message componnent */
@@ -154,37 +155,4 @@ th {
   justify-content: center;
   display: flex;
   padding-top: 20px;
-}
-:host {
-  ::ng-deep .prime-dropdown {
-    border-color: black;
-    border-radius: 9px;
-    width: 250px;
-    margin-top: 20px;
-    padding: 5px;
-  }
-}
-:host {
-  ::ng-deep .prime-dropdown span {
-    text-align: center;
-    padding: 5px;
-  }
-  ::ng-deep .prime-dropdown input {
-    padding: 7px;
-    margin-bottom: 5p;
-    direction: rtl;
-  }
-  ::ng-deep .prime-dropdown .p-dropdown-filter-icon {
-    transform: translate(-260px, -6px);
-  }
-  ::ng-deep .prime-dropdown ul {
-    text-align: center;
-    padding: 0;
-  }
-  ::ng-deep .prime-dropdown li {
-    padding-bottom: 10px;
-  }
-  ::ng-deep .prime-dropdown .p-dropdown-clear-icon.p-icon {
-    transform: translate(0, -6px);
-  }
 }

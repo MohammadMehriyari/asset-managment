@@ -34,7 +34,6 @@ import { RepairReportComponent } from '../Reports/repair-report/repair-report.co
 import { OutboundReportComponent } from '../Reports/outbound-report/outbound-report.component';
 import { InstallReportComponent } from '../Reports/install-report/install-report.component';
 import { ExchangeReportComponent } from '../Reports/exchange-report/exchange-report.component';
-import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'as-supporter-admin-ticker',
@@ -56,7 +55,6 @@ import { DropdownModule } from 'primeng/dropdown';
     RouterModule,
     MatTabsModule,
     MatListModule,
-    DropdownModule,
   ],
   templateUrl: './supporter-admin-ticker.component.html',
   styleUrl: './supporter-admin-ticker.component.css',
