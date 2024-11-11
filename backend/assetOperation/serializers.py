@@ -427,7 +427,7 @@ class GoodsAttributesDefaultValueSerializer(serializers.ModelSerializer):
 
         goods_attribute = Goodsattributes.objects.get(goodsattributesid=goodsAttributesId)
         if goods_attribute.goodsattributestype == 2:
-            raise serializers.ValidationError("you can not set the default value for the goods attribute's type with 2")
+            raise serializers.ValidationError("این نوع از ویژگی ها دارای صفت پیشفرض نیستند")
 
         return Goodsattributesdefaultvalue.objects.create(
             goodsattributesid=goods_attribute,
@@ -522,21 +522,21 @@ class GoodsgroupAttributecategoryGoodsattributesOrderSerializer(serializers.Mode
             self.goodsattributesid = Goodsattributes.objects.get(goodsattributesid=value)
             return value
         except:
-            raise serializers.ValidationError("goods attribute with this id not exist!")
+            raise serializers.ValidationError("ویژگی کالا با این اطلاعات وجود ندارد")
 
     def validate_AttributeCategoryId(self, value):
         try:
             self.attributecategoryid = Attributecategory.objects.get(attributecategoryid=value)
             return value
         except:
-            raise serializers.ValidationError("attribute category with this id not exist!")
+            raise serializers.ValidationError("دسته ویژگی کالا با این اطلاعات وجود ندارد")
 
     def validate_GooodsGroupId(self, value):
         try:
             self.gooodsgroupid = Goodsgroup.objects.get(gooodsgroupid=value)
             return value
         except:
-            raise serializers.ValidationError("goods group with this id not exist!")
+            raise serializers.ValidationError("دسته کالا با این اطلاعات وجود ندارد")
 
     def validate(self, attrs):
         if GoodsgroupAttributecategoryGoodsattributesOrder.objects.filter(gooodsgroupid=attrs.get('GooodsGroupId'),
@@ -587,7 +587,7 @@ class UpdateGoodsgroupAttributecategoryGoodsattributesOrderSerializer(serializer
     def validate_AttributeCategoryId(self, value):
         if Attributecategory.objects.filter(attributecategoryid=value):
             return value
-        raise serializers.ValidationError('attribute category with this id not exists!')
+        raise serializers.ValidationError('دسته ویژگی کالا با این اطلاعات وجود ندارد')
 
     def save(self):
         if self.AttributeCategoryId:
@@ -640,7 +640,7 @@ class GoodsSerializer(serializers.ModelSerializer):
             self.goods_group = Goodsgroup.objects.get(gooodsgroupid=value)
             return value
         except:
-            raise serializers.ValidationError('good group with this id not exists')
+            raise serializers.ValidationError('دسته کالا با این اطلاعات وجود ندارد')
 
     def create(self, validated_data):
 
@@ -706,14 +706,14 @@ class AssinedAttributestoGoodsSerializer(serializers.ModelSerializer):
             self.goods = Goods.objects.get(goodsid=value)
             return value
         except:
-            raise serializers.ValidationError('good with this id not exists')
+            raise serializers.ValidationError('کالا با این اطلاعات وجود ندارد')
 
     def validate_GoodsAttributesId(self, value):
         try:
             self.goods_attribute = Goodsattributes.objects.get(goodsattributesid=value)
             return value
         except:
-            raise serializers.ValidationError('good attribute with this id not exists')
+            raise serializers.ValidationError('ویژگی کالا با این اطلاعات وجود ندارد')
 
     def get_goodsid(self, obj):
         return GoodsSerializer(obj.goodsid).data
@@ -740,7 +740,7 @@ class UpdateAssinedAttributestoGoodsSerializer(serializers.Serializer):
                                                                  goodsattributesid=self.goodsattributesid)
         except:
             raise serializers.ValidationError(
-                'your entered attribute value not exists!')
+                'ویژگی کالا با این اطلاعات موجود نیست')
 
         return attrs
 
@@ -802,14 +802,14 @@ class DeliveredGoodsSerializer(serializers.ModelSerializer):
             return False
     def validate_deliveredgoodsserial(self, value):
         if Deliveredgoods.objects.filter(deliveredgoodsserial=value):
-            raise serializers.ValidationError('delivery exists with this serial')
+            raise serializers.ValidationError('کالای تحویلی با این سریال قبلا ثبت شده است')
         return value
     def validate_GoodsId(self, value):
         try:
             self.goods = Goods.objects.get(goodsid=value)
             return value
         except:
-            raise serializers.ValidationError('good with this id not exists')
+            raise serializers.ValidationError('کالایی با این اطلاعات وجود ندارد')
 
     def create(self, validated_data):
         request = self.context.get("request")
@@ -903,12 +903,12 @@ class DeliveredGoodsRelatedToComputerSerializer(serializers.Serializer):
         try:
             self.instance = Deliveredgoods.objects.get(deliveredgoodsid=self.pk)
         except:
-            raise serializers.ValidationError('delivery goods with this id not exists!')
+            raise serializers.ValidationError('کالای تحویلی با این اطلاعات وجود ندارد')
         print('here',self.instance.goodsid.gooodsgroupid.ispartinsidecomputer)
         if self.instance.goodsid.gooodsgroupid.ispartinsidecomputer == False:
 
             raise serializers.ValidationError(
-                'delivery goods with this id is not the goods that can be use inside the computer!')
+                'این نوع کالای تحویلی نمی تواند کالای داخل کیس باشد ')
 
         return attrs
 
@@ -917,7 +917,7 @@ class DeliveredGoodsRelatedToComputerSerializer(serializers.Serializer):
             self.computer = Computer.objects.get(computerpropertynumber=value)
             return value
         except:
-            raise serializers.ValidationError('computer with this id not exists!')
+            raise serializers.ValidationError('کامپیوتری با این اطلاعات وجود ندارد')
 
     def save(self):
         request = self.context.get("request")
@@ -956,7 +956,7 @@ class ComputerSeallingSerializer(serializers.ModelSerializer):
             self.computer = Computer.objects.get(computerpropertynumber=value)
             return value
         except:
-            raise serializers.ValidationError('computer with this number not exists')
+            raise serializers.ValidationError('کامپیوتری با این اطلاعات وجود ندارد')
 
     def create(self, validated_data):
         request = self.context.get("request")
@@ -1024,13 +1024,13 @@ class AssignSeallToComputerSerializer(serializers.Serializer):
         # try:
         self.instance = Computersealling.objects.get(computerseallingid=self.pk)
         if self.instance.computerpropertynumber:
-            raise serializers.ValidationError('this sealing already assigned!')
+            raise serializers.ValidationError('این پلمپ قبلا استفاده شده است')
         # except:
             # raise serializers.ValidationError('sealling with this id not exists!')
 
         if self.instance and self.instance.isexpired:
             raise serializers.ValidationError(
-                'this sealling id is expired you can not assign it to computer!')
+                'این پلمپ منقشی شده است و شما قادر به استفاده از آن نیستید')
 
         return attrs
 
@@ -1039,7 +1039,7 @@ class AssignSeallToComputerSerializer(serializers.Serializer):
             self.computer = Computer.objects.get(computerpropertynumber=value)
             return value
         except:
-            raise serializers.ValidationError('computer with this id not exists!')
+            raise serializers.ValidationError('کامپیوتری با این اطلاعات وجود ندارد')
 
     def save(self):
         request = self.context.get("request")
@@ -1064,15 +1064,15 @@ class AssignComputerToUserSerializer(serializers.Serializer):
         try:
             self.instance = Computer.objects.get(computerpropertynumber=self.pk)
         except Computer.DoesNotExist:
-            raise serializers.ValidationError('computer with this id not exists!')
+            raise serializers.ValidationError('کامپیوتری با این اطلاعات وجود ندارد')
 
         if self.instance.owneruserid:
-            raise serializers.ValidationError('this computer already assigned to an user')
+            raise serializers.ValidationError('این کامپیوتر  دارای مالک است')
 
         try:
             Computersealling.objects.get(computerpropertynumber=self.instance, isexpired=False)
         except Computersealling.DoesNotExist:
-            raise serializers.ValidationError('your computer should have the sealing then you  can assign it!')
+            raise serializers.ValidationError('قبل از تحویل کامپیوتر باید آن را پلمپ کنید')
 
         try:
             user = User.objects.get(userid=attrs.get('ownerUserId'))
@@ -1081,7 +1081,7 @@ class AssignComputerToUserSerializer(serializers.Serializer):
 
             Userlocationinbuildingarea.objects.filter(buildingid=building, userid=user, areaid=area)
         except:
-            raise serializers.ValidationError('this user not working in this area and building!')
+            raise serializers.ValidationError('این کاربر در ساختمان و حوزه  فعلی کار نمی کند')
 
         return attrs
 
@@ -1090,21 +1090,21 @@ class AssignComputerToUserSerializer(serializers.Serializer):
             self.owneruser = User.objects.get(userid=value)
             return value
         except:
-            raise serializers.ValidationError('user with this id not exists!')
+            raise serializers.ValidationError('کاربری با این اطلاعات وجود ندارد')
 
     def validate_areaId(self, value):
         try:
             self.area = Area.objects.get(areaid=value)
             return value
         except:
-            raise serializers.ValidationError('area with this id not exists!')
+            raise serializers.ValidationError('حوزه با این اطلاعات وجود ندارد')
 
     def validate_buildingId(self, value):
         try:
             self.building = Building.objects.get(buildingid=value)
             return value
         except:
-            raise serializers.ValidationError('building with this id not exists!')
+            raise serializers.ValidationError('ساختمانی با این اطلاعات وجود ندارد')
 
     def save(self):
         request = self.context.get("request")

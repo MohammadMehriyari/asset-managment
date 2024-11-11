@@ -154,13 +154,13 @@ class CreatUserSerializer(serializers.Serializer):
 
         # if user with this personal id exists will raise the below error
         if User.objects.filter(userpersonalid=self.userpersonalid):
-            raise serializers.ValidationError(detail='user with this id already exists!')
+            raise serializers.ValidationError(detail='کاربر با این کد کاربری قبلا ثبت شده است')
 
         # if user be admin
         if self.user.userroleid.userroleid == 1:
             # if admin want to create usual just in that case user must have entered the supporter id
             if self.userroleid == 3 and self.supporterid == '':
-                raise serializers.ValidationError("you have to enter the supporter id")
+                raise serializers.ValidationError("کد کاربری پشتیبان را وارد نمایید")
             # the admin just can add 2 -> supporter user , 3 -> usual user
             if self.userroleid != 2 and self.userroleid != 3:
                 raise serializers.ValidationError('the id of role is not valid')
@@ -174,7 +174,7 @@ class CreatUserSerializer(serializers.Serializer):
 
         # if we create the usual user we have to fill userlandlinephonenumber field
         if self.userroleid != 2 and not self.userphonenumber:
-            raise serializers.ValidationError('you have to enter user phone number')
+            raise serializers.ValidationError('تلفن همراه کاربر را وارد کنید')
 
         return attrs
 
@@ -217,7 +217,7 @@ class WorkingLoactionSerializer(serializers.Serializer):
             with connection.cursor() as cursor:
                 cursor.execute(query, [self.areaId])
         except:
-            raise serializers.ValidationError('entered area id not in the area table')
+            raise serializers.ValidationError('این حوزه موجود نیست ')
 
         # if our user be the supporter
         if request.user.userroleid.userroleid == 2:
@@ -227,7 +227,7 @@ class WorkingLoactionSerializer(serializers.Serializer):
                 cursor.execute(query, [user.userpersonalid])
             self.user = cursor.fetchone()
             if self.user[1] != self.areaId or self.user[2] != self.buildingId:
-                raise serializers.ValidationError('supporter user just can add user to you area and building')
+                raise serializers.ValidationError('به عنوان پشتیبان فقط قادر به ایجاد کاربر در ساختمان و حوزه خود هستید')
 
         return attrs
 
@@ -300,7 +300,7 @@ class UpdateWorkingLocationSerializer(serializers.Serializer):
                 cursor.execute(query, [request.user.userpersonalid])
             self.user = cursor.fetchone()
             if self.user[1] != self.areaId or self.user[2] != self.buildingId:
-                raise serializers.ValidationError('Supporter user can only add user to their area and building.')
+                raise serializers.ValidationError('به عنوان پشتیبان فقط قادر به ایجاد کاربر در ساختمان و حوزه خود هستید')
 
         query = 'SELECT userid FROM user WHERE userpersonalid = %s'
         with connection.cursor() as cur:
@@ -423,7 +423,7 @@ class ChangeSubUserPasswordSerializer(serializers.Serializer):
             print(data)
             if not data:
                 raise serializers.ValidationError(
-                    'you could not change the user password that not worked in your section')
+                    'نمی توانید رمز عبور شخصی را که در ساختمان و حوزه شما نیست را عوض کنید')
 
         password = make_password(new_password)
         query = f"UPDATE user SET userpasword = %s, updateruserid =%s WHERE userpersonalid = %s and userroleid > 1"
@@ -495,7 +495,7 @@ class ChangeSubUserInfoSerializer(serializers.Serializer):
             cursor.close()
             if not data:
                 raise serializers.ValidationError(
-                    'you could not change the user password that not worked in your section')
+                    'نمی توانید رمز عبور شخصی را که در ساختمان و حوزه شما نیست را عوض کنید')
 
         update_fields = []
         update_values = []
@@ -547,9 +547,9 @@ class ChooseTheSupporter(serializers.Serializer):
 
         if userdetail:
             if userdetail[1] != 2:
-                raise serializers.ValidationError('your entry user must be supporter')
+                raise serializers.ValidationError('کاربر انتخاب شده باید پشتیبان باشد')
         else:
-            raise serializers.ValidationError('user with this personal id not exist!')
+            raise serializers.ValidationError('کاربری با این کد پرسنلی وجود ندارد')
 
         query = 'select * from building where buildingid = %s'
         with connection.cursor() as cur:
@@ -558,7 +558,7 @@ class ChooseTheSupporter(serializers.Serializer):
         cur.close()
 
         if buildingdetail is None:
-            raise serializers.ValidationError('the building with this id does not exist!')
+            raise serializers.ValidationError('ساختمانی با این کد وجود ندارد')
 
         if floor <= buildingdetail[7]:
             print(buildingId, floor)
@@ -568,7 +568,7 @@ class ChooseTheSupporter(serializers.Serializer):
             data = cur.fetchone()
             print(data)
             if data:
-                raise serializers.ValidationError('This floor already has a supporter')
+                raise serializers.ValidationError('برای این طبقه قبلا پشتیبان ثبت شده است')
 
         if not (0 <= floor <= buildingdetail[7]):
             raise serializers.ValidationError(
@@ -608,7 +608,7 @@ class DeleteSupporterSerializer(serializers.Serializer):
         cur.close()
 
         if buildingdetail is None:
-            raise serializers.ValidationError('the building with this id does not exist!')
+            raise serializers.ValidationError('ساختمانی با این کد وجود ندارد')
 
         if not (0 <= floor <= buildingdetail[7]):
             raise serializers.ValidationError('your entered value so bigger than the available floor')
@@ -625,7 +625,7 @@ class DeleteSupporterSerializer(serializers.Serializer):
                 with connection.cursor() as cur:
                     cur.execute(query, [buildingId, userdetail[0], floor])
             else:
-                raise serializers.ValidationError('we dont have any detail about this in database')
+                raise serializers.ValidationError('اطلاعاتی در این مورد در پایگاه داده موجود نیست')
 
         return attrs
 
@@ -650,9 +650,9 @@ class UpdateSupporterInfoSerializer(serializers.Serializer):
 
         if userdetail_new:
             if userdetail_new[1] != 2:
-                raise serializers.ValidationError('your entry user must be supporter')
+                raise serializers.ValidationError('ورودی شما باید یک پشتیبان باشد')
         else:
-            raise serializers.ValidationError('user with this user id not exist!')
+            raise serializers.ValidationError('کاربری با این کد پرسنلی موجود نیست')
 
         query = 'select userid, userroleid from user where userpersonalid = %s'
         with connection.cursor() as cur:
@@ -665,7 +665,7 @@ class UpdateSupporterInfoSerializer(serializers.Serializer):
             cur.execute(query, [userdetailold[0], floor, buildingId])
             is_exist = cur.fetchone()
             if not is_exist:
-                raise serializers.ValidationError('we dont have any detail about this in database')
+                raise serializers.ValidationError('اطلاعاتی در این مورد در پایگاه داده موجود نیست')
         cur.close()
 
         query = 'update availablefloortousersupport set usersupportid = %s where usersupportid =%s and availablefloor = %s and buildingid = %s'
