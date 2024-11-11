@@ -4,7 +4,7 @@
   left: 50%;
   transform: translateX(-50%);
   padding: 10px;
-  background-color: #adc4e8;
+  background-color: #000000;
   color: #fff;
   border-radius: 5px;
   display: flex;
@@ -96,4 +96,12 @@
 }
 .full-width-table td {
   text-align: center;
+}
+::ng-deep .mat-mdc-dialog-surface.mdc-dialog__surface {
+  background-color: #adb6ff;
+}
+mat-paginator,
+table,
+thead {
+  background-color: #8e9aff00;
 }

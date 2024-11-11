@@ -19,6 +19,7 @@ import { map, Observable, tap } from 'rxjs';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ModalsComponent } from '../../../Shared/modals/modals.component';
 import moment from 'jalali-moment';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'as-product-feature-category-order',
@@ -35,6 +36,7 @@ import moment from 'jalali-moment';
     CommonModule,
     RouterLink,
     RouterModule,
+    NgSelectModule
   ],
   templateUrl: './product-feature-category-order.component.html',
   styleUrl: './product-feature-category-order.component.css',

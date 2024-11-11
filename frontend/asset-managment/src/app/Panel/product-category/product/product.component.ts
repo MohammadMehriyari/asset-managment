@@ -21,6 +21,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalsComponent } from '../../../Shared/modals/modals.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import moment from 'jalali-moment';
+import { NgSelectModule } from '@ng-select/ng-select';
 @Component({
   selector: 'as-product',
   standalone: true,
@@ -38,6 +39,7 @@ import moment from 'jalali-moment';
     MatButtonModule,
     RouterLink,
     RouterModule,
+    NgSelectModule,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css',

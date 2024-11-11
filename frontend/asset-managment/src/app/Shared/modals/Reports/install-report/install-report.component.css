@@ -115,9 +115,29 @@ textarea {
 .select1 {
   word-wrap: normal;
   margin-top: 20px;
-  width: 348px;
+  width: 250px;
   border-radius: 9px;
+  text-align: center;
+}
+::ng-deep .ng-input {
+  padding-right: 30px;
+}
+::ng-deep .ng-input > input {
+  direction: rtl;
+}
+::ng-deep .ng-value-label.ng-star-inserted {
+  margin-left: 80px;
+}
+::ng-deep .ng-select .ng-select-container {
+  border-color: #000000;
+  border-radius: 9px;
+  height: 44px !important;
 }
 .form-group option {
   text-align: center;
+}
+mat-paginator,
+table,
+thead {
+  background-color: #8e9aff00;
 }

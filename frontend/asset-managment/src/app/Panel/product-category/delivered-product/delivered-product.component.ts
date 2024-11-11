@@ -27,6 +27,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { DeliveredGoodsComputerComponent } from '../../../Shared/modals/delivered-goods-computer/delivered-goods-computer.component';
 import { DeliveredGoodsUserComponent } from '../../../Shared/modals/delivered-goods-user/delivered-goods-user.component';
 import moment from 'jalali-moment';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'as-delivered-product',
@@ -45,6 +46,7 @@ import moment from 'jalali-moment';
     MatButtonModule,
     RouterLink,
     RouterModule,
+    NgSelectModule,
   ],
   templateUrl: './delivered-product.component.html',
   styleUrl: './delivered-product.component.css',

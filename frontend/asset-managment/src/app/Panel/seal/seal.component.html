@@ -26,20 +26,21 @@
           <label style="width: 90px" for="computerpropertynumber"
             >کامپیوتر
           </label>
-          <select
+          <ng-select
+            notFoundText="اطلاعاتی بدست نیامد"
             id="computerpropertynumber"
             class="select1"
             formControlName="computerpropertynumber"
           >
             >
-            <option selected>انتخاب کنید</option>
-            <option
+            <ng-option selected>انتخاب کنید</ng-option>
+            <ng-option
               *ngFor="let pc of pcList"
               [value]="pc.computerpropertynumber"
             >
               {{ pc.computername }}
-            </option>
-          </select>
+            </ng-option>
+          </ng-select>
         </div>
       </div>
       <div class="row">

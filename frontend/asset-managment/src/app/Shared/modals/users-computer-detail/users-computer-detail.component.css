@@ -15,3 +15,11 @@
 .full-width-table td {
   text-align: center;
 }
+mat-paginator,
+table,
+thead {
+  background-color: #8e9aff00;
+}
+.dialog-container {
+  background-color: #8e9aff73;
+}

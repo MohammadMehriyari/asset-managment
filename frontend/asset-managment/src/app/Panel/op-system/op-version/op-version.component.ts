@@ -19,6 +19,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalsComponent } from '../../../Shared/modals/modals.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import moment from 'jalali-moment';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'as-op-version',
@@ -35,6 +36,7 @@ import moment from 'jalali-moment';
     MatInputModule,
     RouterLink,
     RouterModule,
+    NgSelectModule,
   ],
   templateUrl: './op-version.component.html',
   styleUrl: './op-version.component.css',

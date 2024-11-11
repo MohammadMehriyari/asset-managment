@@ -209,28 +209,34 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="areaId"> حوزه</label>
-            <select id="areaId" class="select1" formControlName="areaId">
-              <option *ngFor="let area of areaList" [value]="area.areaid">
+            <ng-select
+              notFoundText="اطلاعاتی بدست نیامد"
+              id="areaId"
+              class="select1"
+              formControlName="areaId"
+            >
+              <ng-option *ngFor="let area of areaList" [value]="area.areaid">
                 {{ area.areaname }}
-              </option>
-            </select>
+              </ng-option>
+            </ng-select>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label for="buildingId"> ساختمان</label>
-            <select
+            <ng-select
+              notFoundText="اطلاعاتی بدست نیامد"
               id="buildingId"
               class="select1"
               formControlName="buildingId"
             >
-              <option
+              <ng-option
                 *ngFor="let building of buildingList"
                 [value]="building.buildingid"
               >
                 {{ building.buildingname }}
-              </option>
-            </select>
+              </ng-option>
+            </ng-select>
           </div>
         </div>
         <div class="col-md-6">

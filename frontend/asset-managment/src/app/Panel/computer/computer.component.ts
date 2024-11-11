@@ -25,6 +25,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { PcUserComponent } from '../../Shared/modals/pc-user/pc-user.component';
 import { UsersComputerDetailComponent } from '../../Shared/modals/users-computer-detail/users-computer-detail.component';
 import { ComputerDetailComponent } from '../../Shared/modals/computer-detail/computer-detail.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'as-computer',
@@ -41,6 +42,7 @@ import { ComputerDetailComponent } from '../../Shared/modals/computer-detail/com
     MatInputModule,
     RouterLink,
     RouterModule,
+    NgSelectModule,
   ],
   templateUrl: './computer.component.html',
   styleUrl: './computer.component.css',
@@ -65,7 +67,7 @@ export class ComputerComponent implements OnInit {
   selectedOsVersions: any[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  selectedOsId!: number;
   // Computer form
   computerForm!: FormGroup;
   userPcForm!: FormGroup;
@@ -95,6 +97,9 @@ export class ComputerComponent implements OnInit {
       computerispersonal: ['', Validators.required],
       osName: ['', Validators.required],
       osVersionId: ['', Validators.required],
+    });
+    this.computerForm.get('osName')?.valueChanges.subscribe((selectedOsId) => {
+      this.onOsNameChange(selectedOsId);
     });
     this.fetchOsList();
     this.userPcForm = this.fb.group({
@@ -261,11 +266,11 @@ export class ComputerComponent implements OnInit {
           osVersionId:
             computerData.operationsystemversionid.operationsystemversionid,
         });
-        this.onOsNameChange({
-          target: {
-            value: computerData.operationsystemversionid.operationsystemid,
-          },
-        } as unknown as Event);
+        this.computerForm
+          .get('osName')
+          ?.valueChanges.subscribe((selectedOsId) => {
+            this.onOsNameChange(selectedOsId);
+          });
         this.showComputerForm = true;
         this.computerpropertynumber = computerData.computerpropertynumber;
       }
@@ -304,11 +309,7 @@ export class ComputerComponent implements OnInit {
       this.showMessage = false;
     }, 3000);
   }
-  onOsNameChange(event: Event): void {
-    const selectedOsId = parseInt(
-      (event.target as HTMLSelectElement).value,
-      10
-    );
+  onOsNameChange(selectedOsId: number): void {
     const selectedOs = this.osList.find(
       (os) => os.operationsystemid === selectedOsId
     );

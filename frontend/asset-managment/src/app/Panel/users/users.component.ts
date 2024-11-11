@@ -27,7 +27,7 @@ import { UserDetailComponent } from '../../Shared/modals/user-detail/user-detail
 import { DialogConfig } from '@angular/cdk/dialog';
 import { UsersPropertyComponent } from '../../Shared/modals/users-property/users-property.component';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FooterComponent } from '../../Shared/footer/footer.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'as-users',
@@ -44,7 +44,7 @@ import { FooterComponent } from '../../Shared/footer/footer.component';
     CommonModule,
     RouterLink,
     RouterModule,
-    FooterComponent,
+    NgSelectModule,
   ],
   providers: [provideAnimations()],
   templateUrl: './users.component.html',

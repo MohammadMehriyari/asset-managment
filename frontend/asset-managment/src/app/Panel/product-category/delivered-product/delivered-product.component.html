@@ -28,44 +28,55 @@
       <div class="row">
         <div class="form-group">
           <label style="width: 90px" for="ownerUserId">کاربر </label>
-          <select
+          <ng-select
+            notFoundText="اطلاعاتی بدست نیامد"
             id="ownerUserId"
             class="select1"
             formControlName="ownerUserId"
           >
             >
-            <option selected>انتخاب کنید</option>
-            <option *ngFor="let user of userList" [value]="user.userid">
+            <ng-option selected>انتخاب کنید</ng-option>
+            <ng-option *ngFor="let user of userList" [value]="user.userid">
               {{ user.username }} {{ user.userlastname }}
-            </option>
-          </select>
+            </ng-option>
+          </ng-select>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
           <label style="width: 90px" for="buildingId">ساختمان </label>
-          <select id="buildingId" class="select1" formControlName="buildingId">
+          <ng-select
+            notFoundText="اطلاعاتی بدست نیامد"
+            id="buildingId"
+            class="select1"
+            formControlName="buildingId"
+          >
             >
-            <option selected>انتخاب کنید</option>
-            <option
+            <ng-option selected>انتخاب کنید</ng-option>
+            <ng-option
               *ngFor="let building of buildingList"
               [value]="building.buildingid"
             >
               {{ building.buildingname }}
-            </option>
-          </select>
+            </ng-option>
+          </ng-select>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
           <label style="width: 90px" for="areaId">حوزه </label>
-          <select id="areaId" class="select1" formControlName="areaId">
+          <ng-select
+            notFoundText="اطلاعاتی بدست نیامد"
+            id="areaId"
+            class="select1"
+            formControlName="areaId"
+          >
             >
-            <option selected>انتخاب کنید</option>
-            <option *ngFor="let area of areaList" [value]="area.areaid">
+            <ng-option selected>انتخاب کنید</ng-option>
+            <ng-option *ngFor="let area of areaList" [value]="area.areaid">
               {{ area.areaname }}
-            </option>
-          </select>
+            </ng-option>
+          </ng-select>
         </div>
       </div>
       <div class="row">
@@ -118,17 +129,21 @@
         <div class="col-md-6" style="width: 24%">
           <div class="form-group">
             <label style="width: 120px" for="GoodsId">کالا </label>
-            <select
+            <ng-select
+              notFoundText="اطلاعاتی بدست نیامد"
               id="GoodsId"
               class="select1"
               formControlName="GoodsId"
               placeholder="اجباری"
             >
               >
-              <option *ngFor="let goods of goodsList" [value]="goods.goodsid">
+              <ng-option
+                *ngFor="let goods of goodsList"
+                [value]="goods.goodsid"
+              >
                 {{ goods.goodsname }}
-              </option>
-            </select>
+              </ng-option>
+            </ng-select>
           </div>
         </div>
         <div class="col-md-6">
@@ -178,18 +193,19 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="computerpropertynumber"> کامپیوتر</label>
-            <select
+            <ng-select
+              notFoundText="اطلاعاتی بدست نیامد"
               id="computerpropertynumber"
               class="select1"
               formControlName="computerpropertynumber"
             >
-              <option
+              <ng-option
                 *ngFor="let computer of computerList"
                 [value]="computer.computerpropertynumber"
               >
                 {{ computer.computername }}
-              </option>
-            </select>
+              </ng-option>
+            </ng-select>
           </div>
         </div>
       </div>

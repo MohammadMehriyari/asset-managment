@@ -44,6 +44,7 @@
                             </select>
                           </div>
                         </div>
+                        ng-
                       </div>
                       <div
                         *ngIf="
@@ -701,20 +702,21 @@
                           <label style="width: 190px" for="RecieverUserId"
                             >مالک جدید
                           </label>
-                          <select
+                          <ng-select
+                            notFoundText="اطلاعاتی بدست نیامد"
                             id="RecieverUserId"
                             class="select1"
                             formControlName="RecieverUserId"
                           >
                             >
-                            <option selected>انتخاب کنید</option>
-                            <option
+                            <ng-option selected>انتخاب کنید</ng-option>
+                            <ng-option
                               *ngFor="let user of userList"
                               [value]="user.userid"
                             >
                               {{ user.username }} {{ user.userlastname }}
-                            </option>
-                          </select>
+                            </ng-option>
+                          </ng-select>
                         </div>
                       </div>
                       <div class="row">
@@ -722,39 +724,42 @@
                           <label style="width: 90px" for="buildingId"
                             >ساختمان
                           </label>
-                          <select
+                          <ng-select
+                            notFoundText="اطلاعاتی بدست نیامد"
+                            ng-
                             id="buildingId"
                             class="select1"
                             formControlName="buildingId"
                           >
                             >
-                            <option selected>انتخاب کنید</option>
-                            <option
+                            <ng-option selected>انتخاب کنید</ng-option>
+                            <ng-option
                               *ngFor="let building of buildingList"
                               [value]="building.buildingid"
                             >
                               {{ building.buildingname }}
-                            </option>
-                          </select>
+                            </ng-option>
+                          </ng-select>
                         </div>
                       </div>
                       <div class="row">
                         <div style="margin-right: 310px" class="form-group">
                           <label style="width: 90px" for="areaId">حوزه </label>
-                          <select
+                          <ng-select
+                            notFoundText="اطلاعاتی بدست نیامد"
                             id="areaId"
                             class="select1"
                             formControlName="areaId"
                           >
                             >
-                            <option selected>انتخاب کنید</option>
-                            <option
+                            <ng-option selected>انتخاب کنید</ng-option>
+                            <ng-option
                               *ngFor="let area of areaList"
                               [value]="area.areaid"
                             >
                               {{ area.areaname }}
-                            </option>
-                          </select>
+                            </ng-option>
+                          </ng-select>
                         </div>
                       </div>
                       <div class="row">

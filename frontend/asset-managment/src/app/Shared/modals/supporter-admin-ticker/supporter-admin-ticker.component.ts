@@ -34,6 +34,7 @@ import { RepairReportComponent } from '../Reports/repair-report/repair-report.co
 import { OutboundReportComponent } from '../Reports/outbound-report/outbound-report.component';
 import { InstallReportComponent } from '../Reports/install-report/install-report.component';
 import { ExchangeReportComponent } from '../Reports/exchange-report/exchange-report.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'as-supporter-admin-ticker',
@@ -55,6 +56,7 @@ import { ExchangeReportComponent } from '../Reports/exchange-report/exchange-rep
     RouterModule,
     MatTabsModule,
     MatListModule,
+    NgSelectModule,
   ],
   templateUrl: './supporter-admin-ticker.component.html',
   styleUrl: './supporter-admin-ticker.component.css',

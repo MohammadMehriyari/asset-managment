@@ -29,11 +29,16 @@
       <div class="col-md-6">
         <div class="form-group">
           <label class="os-label" for="osId"> سیستم عامل</label>
-          <select id="osId" class="select1" formControlName="osId">
-            <option *ngFor="let os of osList" [value]="os.operationsystemid">
+          <ng-select
+            id="osId"
+            class="select1"
+            formControlName="osId"
+            notFoundText="اطلاعاتی بدست نیامد"
+          >
+            <ng-option *ngFor="let os of osList" [value]="os.operationsystemid">
               {{ os.operationsystemname }}
-            </option>
-          </select>
+            </ng-option>
+          </ng-select>
         </div>
       </div>
       <div class="col-md-6">

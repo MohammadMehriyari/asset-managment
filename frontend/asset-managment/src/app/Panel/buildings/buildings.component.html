@@ -25,25 +25,29 @@
   >
     <div class="form-group supporter">
       <label for="userpersonalid">پشتیبان</label>
-      <select
+      <ng-select
+        notFoundText="اطلاعاتی بدست نیامد"
         class="form-select"
         id="userpersonalid"
         formControlName="userpersonalid"
       >
-        <option value="">انتخاب کنید</option>
+        <ng-option value="">انتخاب کنید</ng-option>
         <ng-container *ngFor="let userArray of userList; let index = index">
-          <option *ngFor="let user of userArray" [value]="user.userpersonalid">
+          <ng-option
+            *ngFor="let user of userArray"
+            [value]="user.userpersonalid"
+          >
             {{ user.username }} {{ user.userlastname }}
-          </option>
+          </ng-option>
         </ng-container>
-      </select>
+      </ng-select>
     </div>
     <div class="form-group building">
       <label style="text-align: end; width: 75px" for="buildingid"
         >ساختمان</label
       >
       <input
-        style="text-align: center; max-width: none"
+        style="text-align: center; max-width: none; height: 44px"
         type="text"
         id="buildingid"
         class="form-control"
@@ -61,7 +65,12 @@
           appearance="outline"
           floatLabel="always"
         >
-          <mat-select formControlName="floor" multiple disableOptionCentering>
+          <mat-select
+            placeholder="انتخاب کنید"
+            formControlName="floor"
+            multiple
+            disableOptionCentering
+          >
             <mat-option
               class="fontSize"
               *ngFor="let floor of floorOptions"

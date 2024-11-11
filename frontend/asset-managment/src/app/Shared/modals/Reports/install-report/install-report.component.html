@@ -23,20 +23,21 @@
           <div class="row">
             <div class="form-group">
               <label style="width: 120px" for="softwareid">نرم افزار </label>
-              <select
+              <ng-select
+                notFoundText="اطلاعاتی بدست نیامد"
                 id="softwareid"
                 class="select1"
                 formControlName="softwareid"
               >
                 >
-                <option selected>انتخاب کنید</option>
-                <option
+                <ng-option selected>انتخاب کنید</ng-option>
+                <ng-option
                   *ngFor="let software of softwareList"
                   [value]="software.softwareid"
                 >
                   {{ software.softwarename }}
-                </option>
-              </select>
+                </ng-option>
+              </ng-select>
             </div>
           </div>
           <div class="row">

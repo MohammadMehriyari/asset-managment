@@ -14,7 +14,7 @@
   transform: translate(-50%, -50%);
   width: 380px;
   padding: 20px;
-  background-color: #fff;
+  background-color: #a7afee;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   z-index: 1001; /* Ensure it's on top of the backdrop */
@@ -25,7 +25,7 @@
   left: 50%;
   transform: translateX(-50%);
   padding: 10px;
-  background-color: #adc4e8;
+  background-color: #000000;
   color: #fff;
   border-radius: 5px;
   display: flex;
@@ -114,4 +114,12 @@ select option {
 }
 .full-width-table td {
   text-align: center;
+}
+::ng-deep .mat-mdc-dialog-surface.mdc-dialog__surface {
+  background-color: #adb6ff;
+}
+mat-paginator,
+table,
+thead {
+  background-color: #8e9aff00;
 }

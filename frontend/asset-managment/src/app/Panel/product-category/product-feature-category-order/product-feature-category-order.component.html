@@ -33,54 +33,57 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="GooodsGroupId"> دسته کالا</label>
-            <select
+            <ng-select
+              notFoundText="اطلاعاتی بدست نیامد"
               id="GooodsGroupId"
               class="select1"
               formControlName="GooodsGroupId"
             >
-              <option
+              <ng-option
                 *ngFor="let goods of goodsCategoryList"
                 [value]="goods.gooodsgroupid"
               >
                 {{ goods.gooodsgroupname }}
-              </option>
-            </select>
+              </ng-option>
+            </ng-select>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-group">
             <label for="AttributeCategoryId"> دسته ویژگی کالا</label>
-            <select
+            <ng-select
+              notFoundText="اطلاعاتی بدست نیامد"
               id="AttributeCategoryId"
               class="select1"
               formControlName="AttributeCategoryId"
             >
-              <option
+              <ng-option
                 *ngFor="let attribute of goodsCategoryFeatureList"
                 [value]="attribute.attributecategoryid"
               >
                 {{ attribute.attributecategoryname }}
-              </option>
-            </select>
+              </ng-option>
+            </ng-select>
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-group">
             <label for="GoodsAttributesId"> ویژگی کالا</label>
-            <select
+            <ng-select
+              notFoundText="اطلاعاتی بدست نیامد"
               id="GoodsAttributesId"
               class="select1"
               formControlName="GoodsAttributesId"
             >
-              <option
+              <ng-option
                 *ngFor="let feature of goodsFeatureList"
                 [value]="feature.goodsattributesid"
               >
                 {{ feature.goodsattributestitle }}
-              </option>
-            </select>
+              </ng-option>
+            </ng-select>
           </div>
         </div>
       </div>

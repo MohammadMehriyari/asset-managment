@@ -62,8 +62,23 @@ label {
 .select1 {
   word-wrap: normal;
   margin-top: 20px;
-  width: 348px;
+  width: 250px;
   border-radius: 9px;
+  text-align: center;
+}
+::ng-deep .ng-input {
+  padding-right: 30px;
+}
+::ng-deep .ng-input > input {
+  direction: rtl;
+}
+::ng-deep .ng-value-label.ng-star-inserted {
+  margin-left: 80px;
+}
+::ng-deep .ng-select .ng-select-container {
+  border-color: #000000;
+  border-radius: 9px;
+  height: 44px !important;
 }
 /* message componnent */
 .message-container {
@@ -72,7 +87,7 @@ label {
   left: 50%;
   transform: translateX(-50%);
   padding: 10px;
-  background-color: #adc4e8;
+  background-color: #000000;
   color: #fff;
   border-radius: 5px;
   display: flex;
@@ -142,7 +157,7 @@ th {
   transform: translate(-50%, -50%);
   width: 380px;
   padding: 20px;
-  background-color: #fff;
+  background-color: #a7afee;
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   z-index: 1001; /* Ensure it's on top of the backdrop */
@@ -174,4 +189,9 @@ th {
 }
 .container2 select {
   width: 250px;
+}
+mat-paginator,
+table,
+thead {
+  background-color: #bac1ff40;
 }

@@ -45,18 +45,19 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="GooodsGroupId"> دسته کالا</label>
-            <select
+            <ng-select
+              notFoundText="اطلاعاتی بدست نیامد"
               id="GooodsGroupId"
               class="select1"
               formControlName="GooodsGroupId"
             >
-              <option
+              <ng-option
                 *ngFor="let product of productList[0]"
                 [value]="product.gooodsgroupid"
               >
                 {{ product.gooodsgroupname }}
-              </option>
-            </select>
+              </ng-option>
+            </ng-select>
           </div>
         </div>
       </div>

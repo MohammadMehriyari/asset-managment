@@ -26,6 +26,7 @@ import { DataService } from '../../../../Services/data-service.service';
 import { ModalsComponent } from '../../modals.component';
 import { OutboundReportComponent } from '../outbound-report/outbound-report.component';
 import { tap } from 'rxjs';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'as-install-report',
@@ -45,6 +46,7 @@ import { tap } from 'rxjs';
     MatButtonModule,
     RouterLink,
     RouterModule,
+    NgSelectModule,
   ],
   templateUrl: './install-report.component.html',
   styleUrl: './install-report.component.css',

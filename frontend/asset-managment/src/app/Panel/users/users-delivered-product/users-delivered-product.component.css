@@ -27,3 +27,8 @@ th {
 .btn.btn-info {
   margin-bottom: 20px;
 }
+mat-paginator,
+table,
+thead {
+  background-color: #bac1ff40;
+}

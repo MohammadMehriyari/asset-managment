@@ -40,6 +40,7 @@ body {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1rem;
+  direction: rtl;
 }
 
 .gutters-sm {
@@ -65,4 +66,10 @@ body {
 }
 .shadow-none {
   box-shadow: none !important;
+}
+.card {
+  background-color: #c6ccffb8;
+}
+.col-sm-9.text-secondary {
+  color: #000000 !important;
 }

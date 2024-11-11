@@ -70,7 +70,7 @@ label {
   left: 50%;
   transform: translateX(-50%);
   padding: 10px;
-  background-color: #adc4e8;
+  background-color: #000000;
   color: #fff;
   border-radius: 5px;
   display: flex;
@@ -122,4 +122,9 @@ option {
 th {
   color: #0d00ff;
   font-size: 15px;
+}
+mat-paginator,
+table,
+thead {
+  background-color: #bac1ff40;
 }
